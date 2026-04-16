@@ -110,14 +110,17 @@ export class MultiScrollView extends Component {
         uiTraContent.setContentSize(new Size(size.width, size.height - heightPve2 / 3));
         this.addNode();
         var currentLevel = playerData.instance.getCurrentLevel();
+        var currentLevelID = Number(currentLevel.ID);
         var index = loadsh.findIndex(pve, function (n: any) {
-            return n.ID === currentLevel.ID;
+            return Number(n.ID) === currentLevelID;
         });
-        let idxPage = index / 22;
-        this.currentPosition = idxPage >= 0 ? this.positions[Math.floor(idxPage)] : new Vec2(0, 0);
-        this.currentPosition = new Vec3(this.currentPosition.x, this.currentPosition.y, 0);
-        let idxLevel = index % 22 + 1;
-        this.currentPosition.y = this.currentPosition.y + this.pve2Prefab.data.getChildByName('level' + idxLevel).y;
+        let idxPage = (index - 1) / 22;
+        let pageIdx = Math.floor(idxPage);
+        let pos = pageIdx >= 0 && pageIdx < this.positions.length ? this.positions[pageIdx] : new Vec2(0, 0);
+        this.currentPosition = new Vec3(pos.x, pos.y, 0);
+        let idxLevel = (index - 1) % 22 + 1;
+        let levelNode = this.pve2Prefab.data.getChildByName('level' + idxLevel);
+        this.currentPosition.y = this.currentPosition.y + (levelNode ? levelNode.position.y : 0);
         this.currentPosition.y -= view.getVisibleSize().height / 2;
         this.scrollToNode();
     }
@@ -208,8 +211,9 @@ export class MultiScrollView extends Component {
 
     scrollToNode () {
         if (this.isNeedScroll) {
-            this.scrollView.scrollTo(new Vec2(
-                0, this.currentPosition.y / (this.scrollView.node.getComponent(UITransform)!.height - screen.windowSize.height)), 0.1);
+            let maxOffset = this.scrollView.getMaxScrollOffset();
+            let percent = maxOffset.y > 0 ? Math.min(this.currentPosition.y / maxOffset.y, 1) : 0;
+            this.scrollView.scrollTo(new Vec2(0, percent), 0.1);
         }
     }
 

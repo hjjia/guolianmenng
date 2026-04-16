@@ -657,7 +657,7 @@ export class playerData extends Component {
         let golds = '75|75|150';
 
         return {
-            ID: levelId,
+            ID: String(levelId),
             name: String(levelId),
             cakes: cakes,
             targets: targets,

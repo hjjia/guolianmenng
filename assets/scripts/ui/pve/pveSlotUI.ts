@@ -46,7 +46,7 @@ export class PveSlotUI extends Component {
             } else { //  未完成
                 this.levelArray[i].status = constants.PVE_LEVEL_STATUS.UNDONE;
             }
-            let ID = this.levelArray[i].ID;
+            let ID = String(this.levelArray[i].ID);
             if (playerData.instance.history.hasOwnProperty(ID)) {
                 this.levelArray[i].star = playerData.instance.history[ID].star;
             }
