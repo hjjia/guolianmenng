@@ -80,5 +80,8 @@
         }
       }
     }
+  },
+  "splash-setting": {
+    "url": "project://settings/splash.png"
   }
 }
