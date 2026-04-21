@@ -53,14 +53,14 @@ export const languages = {
         "魔法棒": "Magic",
         "刷新": "Refresh",
         "无限": "infinite",
-        "消除选择的1个蛋糕，每局限用3个": "Remove the selected cake. 3 times each game.",
-        "赋予选择的1个蛋糕直线特效，每局限用1个": "Give the cake a straight line effect. 1 times each game.",
-        "重新排列游戏区内所有蛋糕，每局限用3次": "Refresh. 3 times each game.",
+        "消除选择的1个水果，每局限用3个": "Remove the selected fruit. 3 times each game.",
+        "赋予选择的1个水果直线特效，每局限用1个": "Give the fruit a straight line effect. 1 time each game.",
+        "重新排列游戏区内所有水果，每局限用3次": "Refresh all fruits. 3 times each game.",
         "使用后本关不再限制游戏步数,每局限用1个": "The steps will be infinite, 1 times each game.",
     },
 
     "rank": {
-        "shareTitle": "Cake Crush",
+        "shareTitle": "Fruit Crash",
     },
 
     "onlineReward": {

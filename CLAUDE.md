@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-CakeCrash (蛋糕消消乐) is a match/link puzzle game built with **Cocos Creator 3.8.0** (project version 3.3.2, migrated from 2.x). Players link matching cakes on an 8x8 grid to complete level objectives. Targets WeChat Mini Games and web platforms. The game is a **pure client-side offline game** — server config and network request methods exist but are unused stubs.
+FruitCrash / 果连萌 is a match/link puzzle game built with **Cocos Creator 3.8.0** (project version 3.3.2, migrated from 2.x). Players link matching fruits on an 8x8 grid to complete level objectives. Targets WeChat Mini Games and web platforms. The game is a **pure client-side offline game** — server config and network request methods exist but are unused stubs.
 
 ### Migration Caveats (2.x → 3.x)
 

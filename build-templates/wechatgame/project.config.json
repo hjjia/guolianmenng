@@ -10,8 +10,8 @@
         "useIsolateContext": true
     },
     "compileType": "game",
-    "libVersion": "game",
-    "appid": "",
+    "libVersion": "3.5.8",
+    "appid": "wx12a0d05cd5701cf0",
     "projectname": "",
     "condition": {
         "search": {

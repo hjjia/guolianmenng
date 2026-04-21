@@ -310,8 +310,8 @@ export class resourceUtil {
     }
 
     /**
-     * 设置蛋糕图片
-     * @param {string} cake 蛋糕图片名称
+     * 设置水果图片
+     * @param {string} cake 水果图片名称
      * @param {cc.Sprite} sprite  
      * @param {function} cb 回调函数
      */

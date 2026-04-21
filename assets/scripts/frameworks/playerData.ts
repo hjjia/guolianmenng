@@ -600,7 +600,7 @@ export class playerData extends Component {
     // CSV中定义的最大关卡ID
     static CSV_MAX_LEVEL = 50;
 
-    // 全部蛋糕种类（与 icons/cakes 目录对应）
+    // 全部水果种类（与 icons/cakes 目录对应）
     static ALL_CAKES = ['cake01', 'cake02', 'cake03', 'cake04', 'cake05', 'cake06', 'cake07', 'cake08'];
 
     getCurrentLevelInfo() {
@@ -619,14 +619,14 @@ export class playerData extends Component {
 
     /**
      * 动态生成超过CSV范围的关卡参数
-     * 设计思路：蛋糕种类锁定7~8种，目标和步数随关卡数缓慢递增
+     * 设计思路：水果种类锁定7~8种，目标和步数随关卡数缓慢递增
      */
     generateLevelInfo(levelId: number) {
         let n = levelId - playerData.CSV_MAX_LEVEL; // 超出CSV的关卡偏移量
 
-        // 蛋糕种类：7种起步，每20关有概率加到8种
+        // 水果种类：7种起步，每20关有概率加到8种
         let cakeCount = n >= 20 ? 8 : 7;
-        // 从全部蛋糕中随机选取cakeCount种
+        // 从全部水果中随机选取cakeCount种
         let shuffled = playerData.ALL_CAKES.slice();
         for (let i = shuffled.length - 1; i > 0; i--) {
             let j = Math.floor(Math.random() * (i + 1));
@@ -636,7 +636,7 @@ export class playerData extends Component {
         }
         let cakes = shuffled.slice(0, cakeCount).join('|');
 
-        // 目标：3种蛋糕，数量随关卡递增
+        // 目标：3种水果，数量随关卡递增
         let targetCakes = shuffled.slice(0, 3);
         let baseTarget = 18;
         let targetGrowth = Math.floor(n * 0.3); // 每关+0.3，约每3关多消1个

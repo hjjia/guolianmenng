@@ -1,4 +1,4 @@
-ID(短一点在节省数据库空间),关卡名称,随机蛋糕种类,消除蛋糕类型及数量,关卡步数,3星要求,金币奖励
+ID(短一点在节省数据库空间),关卡名称,随机水果种类,消除水果类型及数量,关卡步数,3星要求,金币奖励
 number,string,string,string,number,string,string
 ID,name,cakes,targets,limit,stars,golds
 1,1,cake01|cake02,cake02-5,8,150|300|450,25|25|50

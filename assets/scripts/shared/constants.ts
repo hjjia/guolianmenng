@@ -74,7 +74,7 @@ const constants = {
     WATCH_AD_MAX_TIMES: {
         LOTTERY: 10, //抽奖
         // CHOICE: 5,          //三选一  
-        // PICK_GAME: 5,       //捡蛋糕游戏
+        // PICK_GAME: 5,       //捡水果游戏
     },
 
     ZORDER: {
@@ -131,7 +131,7 @@ const constants = {
         CLICK: "click", //点击音效
         BONUS_TIME: "bonusTime",
         FINISH_LINK: "finishLink", //连接完后触发
-        CLICK_CAKE: "clickCake", //点击蛋糕
+        CLICK_CAKE: "clickCake", //点击水果
         FINISH_STAR: "finishStar", //星星达成
         FLY_STAR: "flyStar", //特殊效果获得
         LINE_BOMB: "lineBomb", //横竖爆炸触发
