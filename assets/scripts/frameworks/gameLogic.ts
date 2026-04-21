@@ -1,3 +1,4 @@
+declare const wx: any;
 import { _decorator } from 'cc';
 import { playerData } from './playerData';
 import { clientEvent } from './clientEvent';
@@ -24,6 +25,21 @@ export class GameLogic {
         return this._instance;
     }
 
+    initShare() {
+        if (typeof wx === 'undefined') return;
+        // 开启右上角转发按钮
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        });
+        // 设置转发内容
+        wx.onShareAppMessage(() => {
+            return {
+                title: '果连萌 - 一起来消除吧！',
+            };
+        });
+    }
+
     onAppShow(res: any) {
         console.log('onAppShow', res);
         if (res.scene === 1037 && res.query) {
@@ -43,6 +59,7 @@ export class GameLogic {
     }
 
     afterLogin() {
+        this.initShare();
         this.startTick();
         setTimeout(() => {
             if (playerData.instance.isOpenOffLineReward(constants.OFFLINE_REWARD * 60 * 1000)) {
@@ -148,6 +165,12 @@ export class GameLogic {
     }
 
     share(funStr: any, objQuery: any, callback: any, isShowConfirmAfterFailed?: any) {
+        if (typeof wx !== 'undefined') {
+            wx.shareAppMessage({
+                title: '果连萌 - 一起来消除吧！',
+                query: objQuery ? Object.keys(objQuery).map((k: string) => k + '=' + objQuery[k]).join('&') : '',
+            });
+        }
         callback();
     }
 
