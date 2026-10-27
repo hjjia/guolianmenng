@@ -62,6 +62,7 @@ export class LinkContent extends Component {
         this.arrLinks = [];
         this.arrLines = [];
         this.levelInfo = playerData.instance.getCurrentLevelInfo();
+        console.log('[linkContent.show] cakes=' + this.levelInfo.cakes + ' targets=' + this.levelInfo.targets + ' dictTargets=' + JSON.stringify(playerData.instance.dictTargets));
         this.initCake();
     }
 
@@ -77,11 +78,17 @@ export class LinkContent extends Component {
 
     initCake (callback?: any) {
         let arrRandom = this.levelInfo.cakes.split('|');
+        let totalCell = constants.LINK_ROWS_COUNT * constants.LINK_COLS_COUNT;
+
+        // 生成本局棋盘的水果分布，保证目标水果有保底数量，避免目标水果不出现导致无法通关
+        let arrCakes = this.generateBoardCakes(arrRandom, totalCell);
+
+        let cellIdx = 0;
         for (let idxRow = 0; idxRow < constants.LINK_ROWS_COUNT; idxRow++) {
             for (let idxCol = 0; idxCol < constants.LINK_COLS_COUNT; idxCol++) {
                 let key = idxCol + idxRow * constants.LINK_COLS_COUNT;
-                let randomCake = arrRandom[loadsh.random(0, arrRandom.length - 1)];
-                this.createCake(key, randomCake, false);
+                this.createCake(key, arrCakes[cellIdx], false);
+                cellIdx++;
             }
         }
         this.showAllLinkItem(true, () => {
@@ -90,6 +97,45 @@ export class LinkContent extends Component {
             }
             this.lastOperationTime = 0;
         });
+    }
+
+    /**
+     * 生成棋盘水果分布数组
+     * 保证每种还需消除的目标水果至少占棋盘的固定比例（默认1/8 = 8个），剩余格子随机填充
+     */
+    generateBoardCakes (arrRandom: any, totalCell: number) {
+        let result: any[] = [];
+
+        // 先放入保底的目标水果（每种目标至少占棋盘 1/8 ≈ 8 个，保证开局明显可见）
+        let dictTargets = playerData.instance.dictTargets || {};
+        let targetCount = Object.keys(dictTargets).length || 1;
+        // 目标水果总数最多占棋盘一半，剩余给非目标水果做装饰
+        let totalTargetSlots = Math.floor(totalCell / 2);
+        let perTargetSlot = Math.floor(totalTargetSlots / targetCount);
+
+        for (let cakeName in dictTargets) {
+            if (dictTargets[cakeName] > 0 && arrRandom.indexOf(cakeName) !== -1) {
+                let count = Math.min(perTargetSlot, dictTargets[cakeName]);
+                for (let i = 0; i < count; i++) {
+                    result.push(cakeName);
+                }
+            }
+        }
+
+        // 剩余格子随机填充
+        while (result.length < totalCell) {
+            result.push(arrRandom[loadsh.random(0, arrRandom.length - 1)]);
+        }
+
+        // 打乱顺序，避免目标水果集中在棋盘头部
+        for (let i = result.length - 1; i > 0; i--) {
+            let j = loadsh.random(0, i);
+            let tmp = result[i];
+            result[i] = result[j];
+            result[j] = tmp;
+        }
+
+        return result;
     }
 
     showAllLinkItem (isShow: any, callback: any) {
@@ -497,6 +543,10 @@ export class LinkContent extends Component {
      * 填补空缺的位置
      */
     fillEmptyCell () {
+        let arrRandom = this.levelInfo.cakes.split('|');
+        // 计算需要优先补充的目标水果（棋盘上数量不足保底值的目标水果）
+        let priorityQueue = this.getPriorityFillCakes(arrRandom);
+
         for (let idxCol = 0; idxCol < constants.LINK_COLS_COUNT; idxCol++) {
             let emptyRow = -1;
             for (let idxRow = 0; idxRow < constants.LINK_ROWS_COUNT; idxRow++) {
@@ -516,11 +566,13 @@ export class LinkContent extends Component {
                 }
             }
             if (emptyRow !== -1) {
-                let arrRandom = this.levelInfo.cakes.split('|');
                 for (let idxRow = emptyRow; idxRow < constants.LINK_ROWS_COUNT; idxRow++) {
                     let index = idxRow * constants.LINK_COLS_COUNT + idxCol;
                     let showIndex = (constants.LINK_ROWS_COUNT + idxRow - emptyRow) * constants.LINK_COLS_COUNT + idxCol;
-                    let randomCake = arrRandom[loadsh.random(0, arrRandom.length - 1)];
+                    // 优先补目标水果，没有则随机
+                    let randomCake = priorityQueue.length > 0
+                        ? priorityQueue.pop()
+                        : arrRandom[loadsh.random(0, arrRandom.length - 1)];
                     this.createCakeForFill(index, randomCake, showIndex);
                 }
             }
@@ -528,6 +580,38 @@ export class LinkContent extends Component {
         this.scheduleOnce(() => {
             this.checkIsBlocked();
         }, 0.2);
+    }
+
+    /**
+     * 计算需要优先补充的目标水果
+     * 保证每种还需消除的目标水果在棋盘上不少于保底数量（默认6个）
+     */
+    getPriorityFillCakes (arrRandom: any) {
+        let MIN_TARGET_COUNT = 6; // 补充时每种目标水果在棋盘上的保底数量
+        let queue: any[] = [];
+        let dictTargets = playerData.instance.dictTargets || {};
+
+        // 统计棋盘上现有各目标水果数量
+        let dictOnBoard: any = {};
+        for (let key in this.dictCakes) {
+            let linkItem = this.dictCakes[key].getComponent(LinkItem);
+            if (linkItem) {
+                dictOnBoard[linkItem.cake] = (dictOnBoard[linkItem.cake] || 0) + 1;
+            }
+        }
+
+        for (let cakeName in dictTargets) {
+            // 该目标还需消除，且在可用水果列表里
+            if (dictTargets[cakeName] > 0 && arrRandom.indexOf(cakeName) !== -1) {
+                let onBoard = dictOnBoard[cakeName] || 0;
+                let target = Math.min(MIN_TARGET_COUNT, dictTargets[cakeName]);
+                let need = target - onBoard;
+                for (let i = 0; i < need; i++) {
+                    queue.push(cakeName);
+                }
+            }
+        }
+        return queue;
     }
 
     createCakeForFill (index: any, cake: any, showIndex: any) {

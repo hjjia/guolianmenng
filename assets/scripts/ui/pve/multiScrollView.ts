@@ -80,7 +80,8 @@ export class MultiScrollView extends Component {
 
         var csvMaxId = csvLevels.length > 0 ? Number(csvLevels[csvLevels.length - 1].ID) : 0;
         for (var i = csvMaxId + 1; i <= totalLevels; i++) {
-            result.push(playerData.instance.generateLevelInfo(i));
+            // 走缓存方法，保证选关页、预览面板、游戏内拿到的是同一份数据
+            result.push(playerData.instance.getLevelInfoById(i));
         }
 
         return result;

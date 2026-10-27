@@ -24,3 +24,4 @@ node_modules/
 .idea/
 .creator/
 .claude/
+.DS_Store

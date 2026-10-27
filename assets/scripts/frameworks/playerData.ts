@@ -576,6 +576,7 @@ export class playerData extends Component {
     }
 
     startNewLevel() {
+        console.log('[startNewLevel] level=' + this.level);
         let levelInfo = this.getCurrentLevelInfo();
         this.score = 0;
         this.spareStep = 0;
@@ -603,18 +604,50 @@ export class playerData extends Component {
     // 全部水果种类（与 icons/cakes 目录对应）
     static ALL_CAKES = ['cake01', 'cake02', 'cake03', 'cake04', 'cake05', 'cake06', 'cake07', 'cake08'];
 
+    // 动态生成关卡的缓存（key: levelId，value: 生成的关卡数据）
+    // 避免每次调用getCurrentLevelInfo都重新生成导致targets和cakes不一致
+    private _generatedLevelCache: { [key: number]: any } = {};
+
     getCurrentLevelInfo() {
-        let level = localConfig.instance.queryByID('level', this.level);
+        console.log('[V2-getCurrentLevelInfo] this.level=' + this.level);
+        return this.getLevelInfoById(this.level);
+    }
+
+    /**
+     * 根据 levelId 获取关卡信息（CSV 或动态生成 + 缓存）
+     * 所有外部需要获取动态关卡数据的地方都必须走这个方法，保证一致性
+     */
+    getLevelInfoById(levelId: any) {
+        let level = localConfig.instance.queryByID('level', levelId);
 
         if (level) {
-            level.level = this.level;
+            level.level = levelId;
             return level;
         }
 
-        // 超过CSV定义的关卡，动态生成
-        level = this.generateLevelInfo(this.level);
-        level.level = this.level;
+        // 超过CSV定义的关卡，动态生成（同一关卡只生成一次，缓存复用）
+        let numId = Number(levelId);
+        let isCached = !!this._generatedLevelCache[numId];
+        if (!isCached) {
+            this._generatedLevelCache[numId] = this.generateLevelInfo(numId);
+            console.log('[V2-LevelInfo] 新生成 level=' + numId + ' targets=' + this._generatedLevelCache[numId].targets + ' cakes=' + this._generatedLevelCache[numId].cakes + ' 调用栈:', new Error().stack);
+        } else {
+            console.log('[V2-LevelInfo] 缓存命中 level=' + numId + ' targets=' + this._generatedLevelCache[numId].targets);
+        }
+        level = this._generatedLevelCache[numId];
+        level.level = numId;
         return level;
+    }
+
+    /**
+     * 清除指定关卡的生成缓存（进入新关卡时调用，确保重玩同一关也是新的随机布局）
+     */
+    clearGeneratedLevelCache(levelId?: number) {
+        if (levelId !== undefined) {
+            delete this._generatedLevelCache[levelId];
+        } else {
+            this._generatedLevelCache = {};
+        }
     }
 
     /**
@@ -622,10 +655,11 @@ export class playerData extends Component {
      * 设计思路：水果种类锁定7~8种，目标和步数随关卡数缓慢递增
      */
     generateLevelInfo(levelId: number) {
-        let n = levelId - playerData.CSV_MAX_LEVEL; // 超出CSV的关卡偏移量
+        let n = levelId - playerData.CSV_MAX_LEVEL; // 超出CSV的关卡偏移量（从1开始）
 
-        // 水果种类：7种起步，每20关有概率加到8种
-        let cakeCount = n >= 20 ? 8 : 7;
+        // 水果种类：紧接第50关(7种)，n>=21开始升到8种
+        // n=1~20(关51~70) → 7种, n=21+ → 8种
+        let cakeCount = n >= 21 ? 8 : 7;
         // 从全部水果中随机选取cakeCount种
         let shuffled = playerData.ALL_CAKES.slice();
         for (let i = shuffled.length - 1; i > 0; i--) {
@@ -636,20 +670,23 @@ export class playerData extends Component {
         }
         let cakes = shuffled.slice(0, cakeCount).join('|');
 
-        // 目标：3种水果，数量随关卡递增
+        // 目标：3种水果，紧接第50关难度（总数约54），每关+0.3
+        // n=1 → 单种18-21，总数54-63（≈ 第50关）
+        // n=10 → 单种21-24，总数63-72
+        // n=30 → 单种27-30(封顶)，总数 81-90
         let targetCakes = shuffled.slice(0, 3);
         let baseTarget = 18;
-        let targetGrowth = Math.floor(n * 0.3); // 每关+0.3，约每3关多消1个
-        let maxTarget = 35;
+        let targetGrowth = Math.floor(n * 0.3);
+        let maxTarget = 30;
         let targets = targetCakes.map((cake: string) => {
-            let count = Math.min(baseTarget + targetGrowth + Math.floor(Math.random() * 4), maxTarget);
+            let count = Math.min(baseTarget + targetGrowth + Math.floor(Math.random() * 3), maxTarget);
             return cake + '-' + count;
         }).join('|');
 
-        // 步数：基础20步，缓慢增长（目标变多步数也增加，维持通关率）
-        let limit = Math.min(20 + Math.floor(n * 0.15), 30);
+        // 步数：从20起步，缓慢增长，最多30步（目标变多步数也增加，维持通关率）
+        let limit = Math.min(20 + Math.floor(n * 0.2), 30);
 
-        // 星级分数线：随关卡递增
+        // 星级分数线：随关卡递增（基础值随关卡增大）
         let baseStar = 5400 + n * 100;
         let stars = baseStar + '|' + (baseStar * 2) + '|' + (baseStar * 3);
 
@@ -927,24 +964,15 @@ export class playerData extends Component {
 
         var last = history[length - 1];
         var curLevelId = parseInt(last.levelId);
-        var curLevel = localConfig.instance.queryByID('level', curLevelId.toString());
-        if (!curLevel) {
-            // 超出CSV范围，动态生成
-            curLevel = playerData.instance.generateLevelInfo(curLevelId);
-        }
+        // 走缓存方法，保证一致性
+        var curLevel = playerData.instance.getLevelInfoById(curLevelId);
 
         if (last.star === 0) {
             return curLevel;
         }
 
-        // 下一关：优先从CSV查，查不到则动态生成
         var nextLevelId = curLevelId + 1;
-        var nextLevel = localConfig.instance.queryOne('level', 'name', String(nextLevelId));
-        if (!nextLevel) {
-            nextLevel = playerData.instance.generateLevelInfo(nextLevelId);
-        }
-
-        return nextLevel;
+        return playerData.instance.getLevelInfoById(nextLevelId);
     }
 
     /**
@@ -1087,11 +1115,8 @@ export class playerData extends Component {
     }
     finishLevel(level: any, score: any) {
         let star = 0;
-        // 优先从CSV查，查不到则动态生成
-        let levelInfo = localConfig.instance.queryByID('level', level);
-        if (!levelInfo) {
-            levelInfo = this.generateLevelInfo(Number(level));
-        }
+        // 走缓存方法，保证一致性
+        let levelInfo = this.getLevelInfoById(level);
 
         let costTime = (Date.now() - this.curLevelInfo.startTime) / 1000;
 
