@@ -1,0 +1,15 @@
+{
+  "id": "pet",
+  "displayName": "萌宠消消岛",
+  "projectName": "PetCrush",
+  "gameId": "pet",
+  "pieceCount": 8,
+  "shareTitle": "萌宠消消岛 - 一起来消除吧！",
+  "platforms": {
+    "wechatgame": { "appId": null },
+    "bytedance-mini-game": { "appId": null }
+  },
+  "version": 1,
+  "extends": "fruit",
+  "description": "萌宠局部覆盖主题；未提供的资源继续使用水果基础主题。"
+}

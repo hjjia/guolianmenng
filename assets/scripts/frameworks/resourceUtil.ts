@@ -236,17 +236,25 @@ export class resourceUtil {
      * @param cb 回调函数
      */
     public static setSpriteFrame (path: string, sprite: SpriteComponent, cb: Function) {
-        this.loadRes(path + '/spriteFrame', SpriteFrame, (err: any, spriteFrame: SpriteFrame) => {
-            if (err) {
-                console.error('set sprite frame failed! err:', path, err);
-                cb(err);
+        resources.load(path + '/spriteFrame', SpriteFrame, (spriteError, spriteFrame) => {
+            if (spriteFrame) {
+                if (sprite && isValid(sprite)) sprite.spriteFrame = spriteFrame;
+                cb(null);
                 return;
             }
 
-            if (sprite && isValid(sprite)) {
-                sprite.spriteFrame = spriteFrame;
+            // 旧工程的 cake09～cake11 被导入为 Texture2D；后续新增棋子也可能沿用此设置。
+            resources.load(path, Texture2D, (textureError, texture) => {
+                if (textureError || !texture) {
+                    console.error('set sprite frame failed:', path, spriteError || textureError);
+                    cb(spriteError || textureError);
+                    return;
+                }
+                const frame = new SpriteFrame();
+                frame.texture = texture;
+                if (sprite && isValid(sprite)) sprite.spriteFrame = frame;
                 cb(null);
-            }
+            });
         });
     }
 

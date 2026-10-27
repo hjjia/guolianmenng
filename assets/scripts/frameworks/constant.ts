@@ -1,6 +1,8 @@
+import { gameBrand } from '../shared/gameBrand';
+
 export class constant {
 
-    public static GAME_NAME = 'template';
+    public static GAME_NAME = gameBrand.displayName;
 
     public static GAME_VERSION = '1.0.1';
 

@@ -1,5 +1,6 @@
 import { _decorator, sys, log } from "cc";
 import { util } from './util';
+import { gameBrand } from '../shared/gameBrand';
 
 const { ccclass, property } = _decorator;
 
@@ -19,7 +20,8 @@ export class StorageManager {
 
     private _jsonData: { [key: string]: any } = {};
     private _path: any = null;
-    private KEY_CONFIG: string = 'link';
+    // 保留水果游戏历史存档键；其他游戏按 gameId 隔离本地进度。
+    private KEY_CONFIG: string = gameBrand.id === 'fruit' ? 'link' : `link-${gameBrand.id}`;
     private _markSave: boolean = false;
     private _saveTimer: any = -1;
 

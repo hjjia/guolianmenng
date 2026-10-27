@@ -1,11 +1,11 @@
 {
-    "setting": {
-        "urlCheck": true,
-        "es6": false,
-        "postcss": true,
-        "minified": true,
-        "newFeature": true
-    },
-    "appid": "testappId",
-    "projectname": ""
+  "setting": {
+    "urlCheck": true,
+    "es6": false,
+    "postcss": true,
+    "minified": true,
+    "newFeature": true
+  },
+  "appid": "",
+  "projectname": "萌宠消消岛"
 }

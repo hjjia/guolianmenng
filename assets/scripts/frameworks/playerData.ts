@@ -6,6 +6,7 @@ import { utils } from "../shared/utils";
 import { localConfig } from "./localConfig";
 import { SceneManager } from "../ui/loading/sceneManager";
 import { clientEvent } from "./clientEvent";
+import { gameBrand } from "../shared/gameBrand";
 
 const { ccclass, property } = _decorator;
 
@@ -601,8 +602,9 @@ export class playerData extends Component {
     // CSV中定义的最大关卡ID
     static CSV_MAX_LEVEL = 50;
 
-    // 全部水果种类（与 icons/cakes 目录对应）
-    static ALL_CAKES = ['cake01', 'cake02', 'cake03', 'cake04', 'cake05', 'cake06', 'cake07', 'cake08'];
+    // 当前主题参与随机关卡的棋子种类（与 icons/cakes 目录对应）。
+    static ALL_CAKES = Array.from({ length: gameBrand.pieceCount }, (_, index) =>
+        `cake${String(index + 1).padStart(2, '0')}`);
 
     // 动态生成关卡的缓存（key: levelId，value: 生成的关卡数据）
     // 避免每次调用getCurrentLevelInfo都重新生成导致targets和cakes不一致

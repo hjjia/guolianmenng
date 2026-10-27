@@ -25,3 +25,7 @@ node_modules/
 .creator/
 .claude/
 .DS_Store
+
+# 主题切换脚本生成的附加棋子；源文件保存在 game-themes/<主题>/pieces/
+/assets/resources/gamePackages/textures/icons/cakes/cake[1-9][0-9]*.png
+/assets/resources/gamePackages/textures/icons/cakes/cake[1-9][0-9]*.png.meta

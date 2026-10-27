@@ -1,0 +1,1900 @@
+[
+  {
+    "file": "audio/music-bgm.mp3",
+    "target": "assets/resources/audio/music/bgm.mp3"
+  },
+  {
+    "file": "audio/music-fight.mp3",
+    "target": "assets/resources/audio/music/fight.mp3"
+  },
+  {
+    "file": "audio/sound-amazing.mp3",
+    "target": "assets/resources/audio/sound/amazing.mp3"
+  },
+  {
+    "file": "audio/sound-bonusTime.mp3",
+    "target": "assets/resources/audio/sound/bonusTime.mp3"
+  },
+  {
+    "file": "audio/sound-click.mp3",
+    "target": "assets/resources/audio/sound/click.mp3"
+  },
+  {
+    "file": "audio/sound-clickCake.mp3",
+    "target": "assets/resources/audio/sound/clickCake.mp3"
+  },
+  {
+    "file": "audio/sound-excellent.mp3",
+    "target": "assets/resources/audio/sound/excellent.mp3"
+  },
+  {
+    "file": "audio/sound-finishLink.mp3",
+    "target": "assets/resources/audio/sound/finishLink.mp3"
+  },
+  {
+    "file": "audio/sound-finishStar.mp3",
+    "target": "assets/resources/audio/sound/finishStar.mp3"
+  },
+  {
+    "file": "audio/sound-flyStar.mp3",
+    "target": "assets/resources/audio/sound/flyStar.mp3"
+  },
+  {
+    "file": "audio/sound-good.mp3",
+    "target": "assets/resources/audio/sound/good.mp3"
+  },
+  {
+    "file": "audio/sound-great.mp3",
+    "target": "assets/resources/audio/sound/great.mp3"
+  },
+  {
+    "file": "audio/sound-lineBomb.mp3",
+    "target": "assets/resources/audio/sound/lineBomb.mp3"
+  },
+  {
+    "file": "audio/sound-plusBomb.mp3",
+    "target": "assets/resources/audio/sound/plusBomb.mp3"
+  },
+  {
+    "file": "audio/sound-rangeBomb.mp3",
+    "target": "assets/resources/audio/sound/rangeBomb.mp3"
+  },
+  {
+    "file": "audio/sound-spareStep.mp3",
+    "target": "assets/resources/audio/sound/spareStep.mp3"
+  },
+  {
+    "file": "audio/sound-unbelievable.mp3",
+    "target": "assets/resources/audio/sound/unbelievable.mp3"
+  },
+  {
+    "file": "backgrounds/home-overlay.png",
+    "target": "assets/textures/bg/homeBg02.png",
+    "width": 720,
+    "height": 882
+  },
+  {
+    "file": "backgrounds/home.jpg",
+    "target": "assets/textures/bg/homeBg01.jpg",
+    "width": 720,
+    "height": 1280
+  },
+  {
+    "file": "backgrounds/levels-panel.jpg",
+    "target": "assets/textures/bg/pveBg2.jpg",
+    "width": 695,
+    "height": 483
+  },
+  {
+    "file": "backgrounds/levels.jpg",
+    "target": "assets/textures/bg/pveBg1.jpg",
+    "width": 695,
+    "height": 2048
+  },
+  {
+    "file": "backgrounds/lotteryImg1.png",
+    "target": "assets/textures/bg/lotteryImg1.png",
+    "width": 658,
+    "height": 658
+  },
+  {
+    "file": "backgrounds/lotteryImg2.png",
+    "target": "assets/textures/bg/lotteryImg2.png",
+    "width": 570,
+    "height": 570
+  },
+  {
+    "file": "backgrounds/lotteryImgLight1.png",
+    "target": "assets/textures/bg/lotteryImgLight1.png",
+    "width": 640,
+    "height": 640
+  },
+  {
+    "file": "backgrounds/lotteryImgLight2.png",
+    "target": "assets/textures/bg/lotteryImgLight2.png",
+    "width": 640,
+    "height": 640
+  },
+  {
+    "file": "backgrounds/shop.jpg",
+    "target": "assets/textures/bg/shopBg01.jpg",
+    "width": 720,
+    "height": 1280
+  },
+  {
+    "file": "branding/editor-splash.png",
+    "target": "settings/splash.png",
+    "width": 599,
+    "height": 272
+  },
+  {
+    "file": "branding/effect-loading-bonusTimeImg031.png",
+    "target": "assets/loginPackage/effect/loading/bonusTimeImg031.png",
+    "width": 354,
+    "height": 354
+  },
+  {
+    "file": "branding/effect-loading-commonHeart01.png",
+    "target": "assets/loginPackage/effect/loading/commonHeart01.png",
+    "width": 50,
+    "height": 46
+  },
+  {
+    "file": "branding/effect-loading-homeImg02.png",
+    "target": "assets/loginPackage/effect/loading/homeImg02.png",
+    "width": 114,
+    "height": 76
+  },
+  {
+    "file": "branding/effect-loading-loadingBg01.jpg",
+    "target": "assets/loginPackage/effect/loading/loadingBg01.jpg",
+    "width": 720,
+    "height": 1280
+  },
+  {
+    "file": "branding/effect-woman01-woman01Body.png",
+    "target": "assets/loginPackage/effect/woman01/woman01Body.png",
+    "width": 103,
+    "height": 142
+  },
+  {
+    "file": "branding/effect-woman01-woman01Face01.png",
+    "target": "assets/loginPackage/effect/woman01/woman01Face01.png",
+    "width": 103,
+    "height": 142
+  },
+  {
+    "file": "branding/effect-woman01-woman01Face02.png",
+    "target": "assets/loginPackage/effect/woman01/woman01Face02.png",
+    "width": 103,
+    "height": 142
+  },
+  {
+    "file": "branding/effect-woman01-woman01Hair01.png",
+    "target": "assets/loginPackage/effect/woman01/woman01Hair01.png",
+    "width": 103,
+    "height": 142
+  },
+  {
+    "file": "branding/effect-woman01-woman01Hair02.png",
+    "target": "assets/loginPackage/effect/woman01/woman01Hair02.png",
+    "width": 103,
+    "height": 142
+  },
+  {
+    "file": "branding/effect-woman01-woman01Hair03.png",
+    "target": "assets/loginPackage/effect/woman01/woman01Hair03.png",
+    "width": 103,
+    "height": 142
+  },
+  {
+    "file": "branding/effect-woman01-woman01Headwear.png",
+    "target": "assets/loginPackage/effect/woman01/woman01Headwear.png",
+    "width": 103,
+    "height": 142
+  },
+  {
+    "file": "branding/login-bg.jpg",
+    "target": "assets/loginPackage/ui/login/loginBg.jpg",
+    "width": 720,
+    "height": 1280
+  },
+  {
+    "file": "branding/login-commontips01.png",
+    "target": "assets/loginPackage/ui/login/commontips01.png",
+    "width": 308,
+    "height": 46
+  },
+  {
+    "file": "branding/login-loginButton03.png",
+    "target": "assets/loginPackage/ui/login/loginButton03.png",
+    "width": 334,
+    "height": 116
+  },
+  {
+    "file": "branding/login-loginButton04.png",
+    "target": "assets/loginPackage/ui/login/loginButton04.png",
+    "width": 334,
+    "height": 116
+  },
+  {
+    "file": "branding/logo-en.png",
+    "target": "assets/loginPackage/ui/login/logoCakeCrush.png",
+    "width": 599,
+    "height": 272
+  },
+  {
+    "file": "branding/logo.png",
+    "target": "assets/loginPackage/ui/login/logo.png",
+    "width": 599,
+    "height": 272
+  },
+  {
+    "file": "branding/ui-singleColor.png",
+    "target": "assets/loginPackage/ui/singleColor.png",
+    "width": 2,
+    "height": 2
+  },
+  {
+    "file": "effects/animation-linkItem-cake01.png",
+    "target": "assets/animations/linkItem/cake01.png",
+    "width": 75,
+    "height": 82
+  },
+  {
+    "file": "effects/fight-bonusTime-bonusTimeImg01.png",
+    "target": "assets/resources/gamePackages/effects/fight/bonusTime/bonusTimeImg01.png",
+    "width": 414,
+    "height": 98
+  },
+  {
+    "file": "effects/fight-bonusTime-bonusTimeImg02.png",
+    "target": "assets/resources/gamePackages/effects/fight/bonusTime/bonusTimeImg02.png",
+    "width": 562,
+    "height": 160
+  },
+  {
+    "file": "effects/fight-bonusTime-bonusTimeImg03.png",
+    "target": "assets/resources/gamePackages/effects/fight/bonusTime/bonusTimeImg03.png",
+    "width": 354,
+    "height": 354
+  },
+  {
+    "file": "effects/fight-coin2-commonIconGold.png",
+    "target": "assets/resources/gamePackages/effects/fight/coin2/commonIconGold.png",
+    "width": 51,
+    "height": 54
+  },
+  {
+    "file": "effects/fight-coin2-commonNumber0102.png",
+    "target": "assets/resources/gamePackages/effects/fight/coin2/commonNumber0102.png",
+    "width": 29,
+    "height": 34
+  },
+  {
+    "file": "effects/fight-coin2-commonTimesSign.png",
+    "target": "assets/resources/gamePackages/effects/fight/coin2/commonTimesSign.png",
+    "width": 27,
+    "height": 30
+  },
+  {
+    "file": "effects/fight-effectHide-tex-00001.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectHide/tex/00001.png",
+    "width": 100,
+    "height": 100
+  },
+  {
+    "file": "effects/fight-effectHide-tex-00002.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectHide/tex/00002.png",
+    "width": 100,
+    "height": 100
+  },
+  {
+    "file": "effects/fight-effectHide-tex-00003.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectHide/tex/00003.png",
+    "width": 100,
+    "height": 100
+  },
+  {
+    "file": "effects/fight-effectHide-tex-00004.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectHide/tex/00004.png",
+    "width": 100,
+    "height": 100
+  },
+  {
+    "file": "effects/fight-effectHide-tex-00005.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectHide/tex/00005.png",
+    "width": 100,
+    "height": 100
+  },
+  {
+    "file": "effects/fight-effectHide-tex-00006.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectHide/tex/00006.png",
+    "width": 100,
+    "height": 100
+  },
+  {
+    "file": "effects/fight-effectHide-tex-00007.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectHide/tex/00007.png",
+    "width": 100,
+    "height": 100
+  },
+  {
+    "file": "effects/fight-effectHide-tex-00008.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectHide/tex/00008.png",
+    "width": 100,
+    "height": 100
+  },
+  {
+    "file": "effects/fight-effectSkillLine-FX_Trail_016_TEX_PYS.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectSkillLine/FX_Trail_016_TEX_PYS.png",
+    "width": 256,
+    "height": 64
+  },
+  {
+    "file": "effects/fight-effectSkillLine-light.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectSkillLine/light.png",
+    "width": 720,
+    "height": 106
+  },
+  {
+    "file": "effects/fight-effectSkillLine-tex-00001.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectSkillLine/tex/00001.png",
+    "width": 720,
+    "height": 64
+  },
+  {
+    "file": "effects/fight-effectSkillLine-tex-00002.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectSkillLine/tex/00002.png",
+    "width": 720,
+    "height": 64
+  },
+  {
+    "file": "effects/fight-effectSkillLine-tex-00003.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectSkillLine/tex/00003.png",
+    "width": 720,
+    "height": 64
+  },
+  {
+    "file": "effects/fight-effectSkillLine-tex-00004.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectSkillLine/tex/00004.png",
+    "width": 720,
+    "height": 64
+  },
+  {
+    "file": "effects/fight-effectSkillLine-tex-00005.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectSkillLine/tex/00005.png",
+    "width": 720,
+    "height": 64
+  },
+  {
+    "file": "effects/fight-effectSkillLine-tex-00006.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectSkillLine/tex/00006.png",
+    "width": 720,
+    "height": 64
+  },
+  {
+    "file": "effects/fight-effectSkillLine-tex-00007.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectSkillLine/tex/00007.png",
+    "width": 720,
+    "height": 64
+  },
+  {
+    "file": "effects/fight-effectSkillLine-tex-00008.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectSkillLine/tex/00008.png",
+    "width": 720,
+    "height": 64
+  },
+  {
+    "file": "effects/fight-effectSkillLine-tex-00009.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectSkillLine/tex/00009.png",
+    "width": 720,
+    "height": 64
+  },
+  {
+    "file": "effects/fight-effectSkillLine-tex-00010.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectSkillLine/tex/00010.png",
+    "width": 720,
+    "height": 64
+  },
+  {
+    "file": "effects/fight-effectSkillRange-tex-00001.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectSkillRange/tex/00001.png",
+    "width": 450,
+    "height": 450
+  },
+  {
+    "file": "effects/fight-effectSkillRange-tex-00002.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectSkillRange/tex/00002.png",
+    "width": 450,
+    "height": 450
+  },
+  {
+    "file": "effects/fight-effectSkillRange-tex-00003.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectSkillRange/tex/00003.png",
+    "width": 450,
+    "height": 450
+  },
+  {
+    "file": "effects/fight-effectSkillRange-tex-00004.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectSkillRange/tex/00004.png",
+    "width": 450,
+    "height": 450
+  },
+  {
+    "file": "effects/fight-effectSkillRange-tex-00005.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectSkillRange/tex/00005.png",
+    "width": 450,
+    "height": 450
+  },
+  {
+    "file": "effects/fight-effectSkillRange-tex-00006.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectSkillRange/tex/00006.png",
+    "width": 450,
+    "height": 450
+  },
+  {
+    "file": "effects/fight-effectSkillRange-tex-00007.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectSkillRange/tex/00007.png",
+    "width": 450,
+    "height": 450
+  },
+  {
+    "file": "effects/fight-effectSkillRange-tex-00008.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectSkillRange/tex/00008.png",
+    "width": 450,
+    "height": 450
+  },
+  {
+    "file": "effects/fight-effectSkillRange-tex-00009.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectSkillRange/tex/00009.png",
+    "width": 450,
+    "height": 450
+  },
+  {
+    "file": "effects/fight-effectSkillRange-tex-00010.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectSkillRange/tex/00010.png",
+    "width": 450,
+    "height": 450
+  },
+  {
+    "file": "effects/fight-effectSkillRange-tex-00011.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectSkillRange/tex/00011.png",
+    "width": 450,
+    "height": 450
+  },
+  {
+    "file": "effects/fight-effectSkillTips-light01.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectSkillTips/light01.png",
+    "width": 49,
+    "height": 59
+  },
+  {
+    "file": "effects/fight-effectSkillTips-light02.png",
+    "target": "assets/resources/gamePackages/effects/fight/effectSkillTips/light02.png",
+    "width": 128,
+    "height": 128
+  },
+  {
+    "file": "effects/fight-eliminate-point.png",
+    "target": "assets/resources/gamePackages/effects/fight/eliminate/point.png",
+    "width": 16,
+    "height": 16
+  },
+  {
+    "file": "effects/fight-frame-frame001.png",
+    "target": "assets/resources/gamePackages/effects/fight/frame/frame001.png",
+    "width": 177,
+    "height": 177
+  },
+  {
+    "file": "effects/fight-frame-frame002.png",
+    "target": "assets/resources/gamePackages/effects/fight/frame/frame002.png",
+    "width": 355,
+    "height": 355
+  },
+  {
+    "file": "effects/fight-frame-frame003.png",
+    "target": "assets/resources/gamePackages/effects/fight/frame/frame003.png",
+    "width": 533,
+    "height": 533
+  },
+  {
+    "file": "effects/fight-frame-frame004.png",
+    "target": "assets/resources/gamePackages/effects/fight/frame/frame004.png",
+    "width": 711,
+    "height": 711
+  },
+  {
+    "file": "effects/fight-guide-cake04.png",
+    "target": "assets/resources/gamePackages/effects/fight/guide/cake04.png",
+    "width": 86,
+    "height": 86
+  },
+  {
+    "file": "effects/fight-guide-cake04Light.png",
+    "target": "assets/resources/gamePackages/effects/fight/guide/cake04Light.png",
+    "width": 100,
+    "height": 100
+  },
+  {
+    "file": "effects/fight-guide-glow_hot_blue2.png",
+    "target": "assets/resources/gamePackages/effects/fight/guide/glow_hot_blue2.png",
+    "width": 32,
+    "height": 32
+  },
+  {
+    "file": "effects/fight-guide-guideHand01.png",
+    "target": "assets/resources/gamePackages/effects/fight/guide/guideHand01.png",
+    "width": 88,
+    "height": 79
+  },
+  {
+    "file": "effects/fight-homeStar-balanceImgLight.png",
+    "target": "assets/resources/gamePackages/effects/fight/homeStar/balanceImgLight.png",
+    "width": 156,
+    "height": 156
+  },
+  {
+    "file": "effects/fight-homeStar-homeStar02.png",
+    "target": "assets/resources/gamePackages/effects/fight/homeStar/homeStar02.png",
+    "width": 68,
+    "height": 66
+  },
+  {
+    "file": "effects/fight-homeStar-homeStar03.png",
+    "target": "assets/resources/gamePackages/effects/fight/homeStar/homeStar03.png",
+    "width": 68,
+    "height": 66
+  },
+  {
+    "file": "effects/fight-linkLine-glow_hot_blue1.png",
+    "target": "assets/resources/gamePackages/effects/fight/linkLine/glow_hot_blue1.png",
+    "width": 32,
+    "height": 32
+  },
+  {
+    "file": "effects/fight-linkLine-homeLightBar01.png",
+    "target": "assets/resources/gamePackages/effects/fight/linkLine/homeLightBar01.png",
+    "width": 136,
+    "height": 34
+  },
+  {
+    "file": "effects/fight-linkStar-homeStar04.png",
+    "target": "assets/resources/gamePackages/effects/fight/linkStar/homeStar04.png",
+    "width": 80,
+    "height": 80
+  },
+  {
+    "file": "effects/fight-linkStar-homeStar05.png",
+    "target": "assets/resources/gamePackages/effects/fight/linkStar/homeStar05.png",
+    "width": 80,
+    "height": 80
+  },
+  {
+    "file": "effects/fight-propGet-balanceImgLight.png",
+    "target": "assets/resources/gamePackages/effects/fight/propGet/balanceImgLight.png",
+    "width": 156,
+    "height": 156
+  },
+  {
+    "file": "effects/fight-propGet-homeIconHammer.png",
+    "target": "assets/resources/gamePackages/effects/fight/propGet/homeIconHammer.png",
+    "width": 84,
+    "height": 84
+  },
+  {
+    "file": "effects/fight-propGet-propGet01-00001.png",
+    "target": "assets/resources/gamePackages/effects/fight/propGet/propGet01/00001.png",
+    "width": 100,
+    "height": 100
+  },
+  {
+    "file": "effects/fight-propGet-propGet01-00002.png",
+    "target": "assets/resources/gamePackages/effects/fight/propGet/propGet01/00002.png",
+    "width": 100,
+    "height": 100
+  },
+  {
+    "file": "effects/fight-propGet-propGet01-00003.png",
+    "target": "assets/resources/gamePackages/effects/fight/propGet/propGet01/00003.png",
+    "width": 100,
+    "height": 100
+  },
+  {
+    "file": "effects/fight-propGet-propGet01-00004.png",
+    "target": "assets/resources/gamePackages/effects/fight/propGet/propGet01/00004.png",
+    "width": 100,
+    "height": 100
+  },
+  {
+    "file": "effects/fight-propGet-propGet01-00005.png",
+    "target": "assets/resources/gamePackages/effects/fight/propGet/propGet01/00005.png",
+    "width": 100,
+    "height": 100
+  },
+  {
+    "file": "effects/fight-propGet-propGet01-00006.png",
+    "target": "assets/resources/gamePackages/effects/fight/propGet/propGet01/00006.png",
+    "width": 100,
+    "height": 100
+  },
+  {
+    "file": "effects/fight-propGet-propGet02-00001.png",
+    "target": "assets/resources/gamePackages/effects/fight/propGet/propGet02/00001.png",
+    "width": 90,
+    "height": 110
+  },
+  {
+    "file": "effects/fight-propGet-propGet02-00002.png",
+    "target": "assets/resources/gamePackages/effects/fight/propGet/propGet02/00002.png",
+    "width": 90,
+    "height": 110
+  },
+  {
+    "file": "effects/fight-propGet-propGet02-00003.png",
+    "target": "assets/resources/gamePackages/effects/fight/propGet/propGet02/00003.png",
+    "width": 90,
+    "height": 110
+  },
+  {
+    "file": "effects/fight-propGet-propGet02-00004.png",
+    "target": "assets/resources/gamePackages/effects/fight/propGet/propGet02/00004.png",
+    "width": 90,
+    "height": 110
+  },
+  {
+    "file": "effects/fight-propGet-propGet02-00005.png",
+    "target": "assets/resources/gamePackages/effects/fight/propGet/propGet02/00005.png",
+    "width": 90,
+    "height": 110
+  },
+  {
+    "file": "effects/fight-propGet-propGet02-00006.png",
+    "target": "assets/resources/gamePackages/effects/fight/propGet/propGet02/00006.png",
+    "width": 90,
+    "height": 110
+  },
+  {
+    "file": "effects/fight-propGet-propGet02-00007.png",
+    "target": "assets/resources/gamePackages/effects/fight/propGet/propGet02/00007.png",
+    "width": 90,
+    "height": 110
+  },
+  {
+    "file": "effects/fight-propGet-propGet02-00008.png",
+    "target": "assets/resources/gamePackages/effects/fight/propGet/propGet02/00008.png",
+    "width": 90,
+    "height": 110
+  },
+  {
+    "file": "effects/fight-propGet-propGet02-00009.png",
+    "target": "assets/resources/gamePackages/effects/fight/propGet/propGet02/00009.png",
+    "width": 90,
+    "height": 110
+  },
+  {
+    "file": "effects/fight-propGet-propGet02-00010.png",
+    "target": "assets/resources/gamePackages/effects/fight/propGet/propGet02/00010.png",
+    "width": 90,
+    "height": 110
+  },
+  {
+    "file": "effects/fight-propGet-propGet02-00011.png",
+    "target": "assets/resources/gamePackages/effects/fight/propGet/propGet02/00011.png",
+    "width": 90,
+    "height": 110
+  },
+  {
+    "file": "effects/fight-showTarget-bg.png",
+    "target": "assets/resources/gamePackages/effects/fight/showTarget/bg.png",
+    "width": 360,
+    "height": 435
+  },
+  {
+    "file": "effects/fight-showTarget-homeImg02.png",
+    "target": "assets/resources/gamePackages/effects/fight/showTarget/homeImg02.png",
+    "width": 114,
+    "height": 76
+  },
+  {
+    "file": "effects/fight-showTarget-homeImg03.png",
+    "target": "assets/resources/gamePackages/effects/fight/showTarget/homeImg03.png",
+    "width": 40,
+    "height": 40
+  },
+  {
+    "file": "effects/fight-showTarget-light01.png",
+    "target": "assets/resources/gamePackages/effects/fight/showTarget/light01.png",
+    "width": 720,
+    "height": 325
+  },
+  {
+    "file": "effects/fight-showTarget-light02.png",
+    "target": "assets/resources/gamePackages/effects/fight/showTarget/light02.png",
+    "width": 720,
+    "height": 230
+  },
+  {
+    "file": "effects/fight-unlimited-glow_hot_yellow.png",
+    "target": "assets/resources/gamePackages/effects/fight/unlimited/glow_hot_yellow.png",
+    "width": 32,
+    "height": 32
+  },
+  {
+    "file": "effects/fight-unlimited-homeIconUnlimited.png",
+    "target": "assets/resources/gamePackages/effects/fight/unlimited/homeIconUnlimited.png",
+    "width": 84,
+    "height": 84
+  },
+  {
+    "file": "effects/fight-unlimited-unlimitedflare-00002.png",
+    "target": "assets/resources/gamePackages/effects/fight/unlimited/unlimitedflare/00002.png",
+    "width": 150,
+    "height": 150
+  },
+  {
+    "file": "effects/fight-unlimited-unlimitedflare-00003.png",
+    "target": "assets/resources/gamePackages/effects/fight/unlimited/unlimitedflare/00003.png",
+    "width": 150,
+    "height": 150
+  },
+  {
+    "file": "effects/fight-unlimited-unlimitedflare-00004.png",
+    "target": "assets/resources/gamePackages/effects/fight/unlimited/unlimitedflare/00004.png",
+    "width": 150,
+    "height": 150
+  },
+  {
+    "file": "effects/fight-unlimited-unlimitedflare-00005.png",
+    "target": "assets/resources/gamePackages/effects/fight/unlimited/unlimitedflare/00005.png",
+    "width": 150,
+    "height": 150
+  },
+  {
+    "file": "effects/fight-unlimited-unlimitedLight-00002.png",
+    "target": "assets/resources/gamePackages/effects/fight/unlimited/unlimitedLight/00002.png",
+    "width": 70,
+    "height": 45
+  },
+  {
+    "file": "effects/fight-unlimited-unlimitedLight-00003.png",
+    "target": "assets/resources/gamePackages/effects/fight/unlimited/unlimitedLight/00003.png",
+    "width": 70,
+    "height": 45
+  },
+  {
+    "file": "effects/fight-unlimited-unlimitedLight-00004.png",
+    "target": "assets/resources/gamePackages/effects/fight/unlimited/unlimitedLight/00004.png",
+    "width": 70,
+    "height": 45
+  },
+  {
+    "file": "effects/fight-unlimited-unlimitedLight-00005.png",
+    "target": "assets/resources/gamePackages/effects/fight/unlimited/unlimitedLight/00005.png",
+    "width": 70,
+    "height": 45
+  },
+  {
+    "file": "effects/fight-unlimited-unlimitedLight-00006.png",
+    "target": "assets/resources/gamePackages/effects/fight/unlimited/unlimitedLight/00006.png",
+    "width": 70,
+    "height": 45
+  },
+  {
+    "file": "effects/fight-unlimited-unlimitedLight-00007.png",
+    "target": "assets/resources/gamePackages/effects/fight/unlimited/unlimitedLight/00007.png",
+    "width": 70,
+    "height": 45
+  },
+  {
+    "file": "effects/loading-pveCloud01.png",
+    "target": "assets/resources/gamePackages/effects/loading/pveCloud01.png",
+    "width": 502,
+    "height": 260
+  },
+  {
+    "file": "effects/loading-pveCloud02.png",
+    "target": "assets/resources/gamePackages/effects/loading/pveCloud02.png",
+    "width": 502,
+    "height": 322
+  },
+  {
+    "file": "effects/role-man01-man01Body.png",
+    "target": "assets/resources/gamePackages/effects/role/man01/man01Body.png",
+    "width": 102,
+    "height": 116
+  },
+  {
+    "file": "effects/role-man01-man01Face01.png",
+    "target": "assets/resources/gamePackages/effects/role/man01/man01Face01.png",
+    "width": 102,
+    "height": 116
+  },
+  {
+    "file": "effects/role-man01-man01Face02.png",
+    "target": "assets/resources/gamePackages/effects/role/man01/man01Face02.png",
+    "width": 102,
+    "height": 116
+  },
+  {
+    "file": "effects/role-man01-man01Hair.png",
+    "target": "assets/resources/gamePackages/effects/role/man01/man01Hair.png",
+    "width": 102,
+    "height": 116
+  },
+  {
+    "file": "effects/ui-balance-light01.png",
+    "target": "assets/resources/gamePackages/effects/ui/balance/light01.png",
+    "width": 512,
+    "height": 512
+  },
+  {
+    "file": "effects/ui-balance-star01.png",
+    "target": "assets/resources/gamePackages/effects/ui/balance/star01.png",
+    "width": 29,
+    "height": 30
+  },
+  {
+    "file": "effects/ui-freeGift-pveIconGift.png",
+    "target": "assets/resources/gamePackages/effects/ui/freeGift/pveIconGift.png",
+    "width": 115,
+    "height": 97
+  },
+  {
+    "file": "effects/ui-getItem-balanceImg12.png",
+    "target": "assets/resources/gamePackages/effects/ui/getItem/balanceImg12.png",
+    "width": 568,
+    "height": 568
+  },
+  {
+    "file": "effects/ui-getItem-commonIconCoin2.png",
+    "target": "assets/resources/gamePackages/effects/ui/getItem/commonIconCoin2.png",
+    "width": 257,
+    "height": 166
+  },
+  {
+    "file": "effects/ui-getItem-star01.png",
+    "target": "assets/resources/gamePackages/effects/ui/getItem/star01.png",
+    "width": 29,
+    "height": 30
+  },
+  {
+    "file": "effects/ui-lottery-pveIconLottery.png",
+    "target": "assets/resources/gamePackages/effects/ui/lottery/pveIconLottery.png",
+    "width": 95,
+    "height": 125
+  },
+  {
+    "file": "effects/ui-lottery-pveIconLotterya.png",
+    "target": "assets/resources/gamePackages/effects/ui/lottery/pveIconLotterya.png",
+    "width": 61,
+    "height": 61
+  },
+  {
+    "file": "effects/ui-lottery-pveIconLotteryb.png",
+    "target": "assets/resources/gamePackages/effects/ui/lottery/pveIconLotteryb.png",
+    "width": 34,
+    "height": 62
+  },
+  {
+    "file": "effects/ui-pveLevelTips-pveLevelEffects-00001.png",
+    "target": "assets/resources/gamePackages/effects/ui/pveLevelTips/pveLevelEffects/00001.png",
+    "width": 200,
+    "height": 160
+  },
+  {
+    "file": "effects/ui-pveLevelTips-pveLevelEffects-00002.png",
+    "target": "assets/resources/gamePackages/effects/ui/pveLevelTips/pveLevelEffects/00002.png",
+    "width": 200,
+    "height": 160
+  },
+  {
+    "file": "effects/ui-pveLevelTips-pveLevelEffects-00003.png",
+    "target": "assets/resources/gamePackages/effects/ui/pveLevelTips/pveLevelEffects/00003.png",
+    "width": 200,
+    "height": 160
+  },
+  {
+    "file": "effects/ui-pveLevelTips-pveLevelEffects-00004.png",
+    "target": "assets/resources/gamePackages/effects/ui/pveLevelTips/pveLevelEffects/00004.png",
+    "width": 200,
+    "height": 160
+  },
+  {
+    "file": "effects/ui-pveLevelTips-pveLevelEffects-00005.png",
+    "target": "assets/resources/gamePackages/effects/ui/pveLevelTips/pveLevelEffects/00005.png",
+    "width": 200,
+    "height": 160
+  },
+  {
+    "file": "effects/ui-pveLevelTips-pveLevelEffects-00006.png",
+    "target": "assets/resources/gamePackages/effects/ui/pveLevelTips/pveLevelEffects/00006.png",
+    "width": 200,
+    "height": 160
+  },
+  {
+    "file": "effects/ui-pveLevelTips-pveLevelEffects-00007.png",
+    "target": "assets/resources/gamePackages/effects/ui/pveLevelTips/pveLevelEffects/00007.png",
+    "width": 200,
+    "height": 160
+  },
+  {
+    "file": "effects/ui-pveLevelTips-pveLevelEffects-00008.png",
+    "target": "assets/resources/gamePackages/effects/ui/pveLevelTips/pveLevelEffects/00008.png",
+    "width": 200,
+    "height": 160
+  },
+  {
+    "file": "effects/ui-pveLevelTips-pveLevelEffects-00009.png",
+    "target": "assets/resources/gamePackages/effects/ui/pveLevelTips/pveLevelEffects/00009.png",
+    "width": 200,
+    "height": 160
+  },
+  {
+    "file": "effects/ui-pveLevelTips-pveLevelEffects-00010.png",
+    "target": "assets/resources/gamePackages/effects/ui/pveLevelTips/pveLevelEffects/00010.png",
+    "width": 200,
+    "height": 160
+  },
+  {
+    "file": "effects/ui-shopProperty-bonusTimeImg032.png",
+    "target": "assets/resources/gamePackages/effects/ui/shopProperty/bonusTimeImg032.png",
+    "width": 354,
+    "height": 354
+  },
+  {
+    "file": "effects/ui-shopProperty-shopImg01.png",
+    "target": "assets/resources/gamePackages/effects/ui/shopProperty/shopImg01.png",
+    "width": 168,
+    "height": 168
+  },
+  {
+    "file": "fonts/balance.png",
+    "target": "assets/fonts/balance.png",
+    "width": 440,
+    "height": 58
+  },
+  {
+    "file": "fonts/commonNumber01.png",
+    "target": "assets/fonts/commonNumber01.png",
+    "width": 330,
+    "height": 43
+  },
+  {
+    "file": "fonts/commonNumber02.png",
+    "target": "assets/fonts/commonNumber02.png",
+    "width": 330,
+    "height": 43
+  },
+  {
+    "file": "fonts/commonNumber03.png",
+    "target": "assets/fonts/commonNumber03.png",
+    "width": 330,
+    "height": 43
+  },
+  {
+    "file": "fonts/commonNumber04.png",
+    "target": "assets/fonts/commonNumber04.png",
+    "width": 400,
+    "height": 55
+  },
+  {
+    "file": "fonts/commonSymbol.png",
+    "target": "assets/fonts/commonSymbol.png",
+    "width": 40,
+    "height": 40
+  },
+  {
+    "file": "fonts/commonTimesSign.png",
+    "target": "assets/fonts/commonTimesSign.png",
+    "width": 34,
+    "height": 37
+  },
+  {
+    "file": "fonts/new-pveImgNumber.png",
+    "target": "assets/fonts/new/pveImgNumber.png",
+    "width": 220,
+    "height": 30
+  },
+  {
+    "file": "fonts/pveImgNumber.png",
+    "target": "assets/fonts/pveImgNumber.png",
+    "width": 220,
+    "height": 30
+  },
+  {
+    "file": "fonts/score.png",
+    "target": "assets/fonts/score.png",
+    "width": 240,
+    "height": 32
+  },
+  {
+    "file": "pieces/cake01.png",
+    "target": "assets/resources/gamePackages/textures/icons/cakes/cake01.png",
+    "width": 86,
+    "height": 86
+  },
+  {
+    "file": "pieces/cake01Light.png",
+    "target": "assets/resources/gamePackages/textures/icons/cakes/cake01Light.png",
+    "width": 100,
+    "height": 100
+  },
+  {
+    "file": "pieces/cake02.png",
+    "target": "assets/resources/gamePackages/textures/icons/cakes/cake02.png",
+    "width": 86,
+    "height": 86
+  },
+  {
+    "file": "pieces/cake02Light.png",
+    "target": "assets/resources/gamePackages/textures/icons/cakes/cake02Light.png",
+    "width": 100,
+    "height": 100
+  },
+  {
+    "file": "pieces/cake03.png",
+    "target": "assets/resources/gamePackages/textures/icons/cakes/cake03.png",
+    "width": 86,
+    "height": 86
+  },
+  {
+    "file": "pieces/cake03Light.png",
+    "target": "assets/resources/gamePackages/textures/icons/cakes/cake03Light.png",
+    "width": 100,
+    "height": 100
+  },
+  {
+    "file": "pieces/cake04.png",
+    "target": "assets/resources/gamePackages/textures/icons/cakes/cake04.png",
+    "width": 86,
+    "height": 86
+  },
+  {
+    "file": "pieces/cake04Light.png",
+    "target": "assets/resources/gamePackages/textures/icons/cakes/cake04Light.png",
+    "width": 100,
+    "height": 100
+  },
+  {
+    "file": "pieces/cake05.png",
+    "target": "assets/resources/gamePackages/textures/icons/cakes/cake05.png",
+    "width": 86,
+    "height": 86
+  },
+  {
+    "file": "pieces/cake05Light.png",
+    "target": "assets/resources/gamePackages/textures/icons/cakes/cake05Light.png",
+    "width": 100,
+    "height": 100
+  },
+  {
+    "file": "pieces/cake06.png",
+    "target": "assets/resources/gamePackages/textures/icons/cakes/cake06.png",
+    "width": 86,
+    "height": 86
+  },
+  {
+    "file": "pieces/cake06Light.png",
+    "target": "assets/resources/gamePackages/textures/icons/cakes/cake06Light.png",
+    "width": 100,
+    "height": 100
+  },
+  {
+    "file": "pieces/cake07.png",
+    "target": "assets/resources/gamePackages/textures/icons/cakes/cake07.png",
+    "width": 86,
+    "height": 86
+  },
+  {
+    "file": "pieces/cake07Light.png",
+    "target": "assets/resources/gamePackages/textures/icons/cakes/cake07Light.png",
+    "width": 100,
+    "height": 100
+  },
+  {
+    "file": "pieces/cake08.png",
+    "target": "assets/resources/gamePackages/textures/icons/cakes/cake08.png",
+    "width": 86,
+    "height": 86
+  },
+  {
+    "file": "pieces/cake08Light.png",
+    "target": "assets/resources/gamePackages/textures/icons/cakes/cake08Light.png",
+    "width": 100,
+    "height": 100
+  },
+  {
+    "file": "pieces/cake09.png",
+    "target": "assets/resources/gamePackages/textures/icons/cakes/cake09.png",
+    "width": 86,
+    "height": 86
+  },
+  {
+    "file": "pieces/cake09Light.png",
+    "target": "assets/resources/gamePackages/textures/icons/cakes/cake09Light.png",
+    "width": 100,
+    "height": 100
+  },
+  {
+    "file": "pieces/cake10.png",
+    "target": "assets/resources/gamePackages/textures/icons/cakes/cake10.png",
+    "width": 86,
+    "height": 86
+  },
+  {
+    "file": "pieces/cake10Light.png",
+    "target": "assets/resources/gamePackages/textures/icons/cakes/cake10Light.png",
+    "width": 100,
+    "height": 100
+  },
+  {
+    "file": "pieces/cake11.png",
+    "target": "assets/resources/gamePackages/textures/icons/cakes/cake11.png",
+    "width": 86,
+    "height": 86
+  },
+  {
+    "file": "pieces/cake11Light.png",
+    "target": "assets/resources/gamePackages/textures/icons/cakes/cake11Light.png",
+    "width": 100,
+    "height": 100
+  },
+  {
+    "file": "ui/balance-balanceImg02.png",
+    "target": "assets/textures/ui/balance/balanceImg02.png",
+    "width": 72,
+    "height": 70
+  },
+  {
+    "file": "ui/balance-balanceImg03.png",
+    "target": "assets/textures/ui/balance/balanceImg03.png",
+    "width": 62,
+    "height": 63
+  },
+  {
+    "file": "ui/balance-balanceImg05.png",
+    "target": "assets/textures/ui/balance/balanceImg05.png",
+    "width": 140,
+    "height": 49
+  },
+  {
+    "file": "ui/balance-balanceImgLv.png",
+    "target": "assets/textures/ui/balance/balanceImgLv.png",
+    "width": 137,
+    "height": 62
+  },
+  {
+    "file": "ui/balance-balanceStar01.png",
+    "target": "assets/textures/ui/balance/balanceStar01.png",
+    "width": 108,
+    "height": 108
+  },
+  {
+    "file": "ui/balance-balanceStar02.png",
+    "target": "assets/textures/ui/balance/balanceStar02.png",
+    "width": 87,
+    "height": 85
+  },
+  {
+    "file": "ui/common-balanceImg10.png",
+    "target": "assets/textures/ui/common/balanceImg10.png",
+    "width": 70,
+    "height": 62
+  },
+  {
+    "file": "ui/common-commonBoxGold.png",
+    "target": "assets/textures/ui/common/commonBoxGold.png",
+    "width": 172,
+    "height": 52
+  },
+  {
+    "file": "ui/common-commonButton01.png",
+    "target": "assets/textures/ui/common/commonButton01.png",
+    "width": 188,
+    "height": 98
+  },
+  {
+    "file": "ui/common-commonButton02.png",
+    "target": "assets/textures/ui/common/commonButton02.png",
+    "width": 188,
+    "height": 98
+  },
+  {
+    "file": "ui/common-commonButton03.png",
+    "target": "assets/textures/ui/common/commonButton03.png",
+    "width": 188,
+    "height": 98
+  },
+  {
+    "file": "ui/common-commonButtonClose01.png",
+    "target": "assets/textures/ui/common/commonButtonClose01.png",
+    "width": 96,
+    "height": 96
+  },
+  {
+    "file": "ui/common-commonButtonClose02.png",
+    "target": "assets/textures/ui/common/commonButtonClose02.png",
+    "width": 80,
+    "height": 80
+  },
+  {
+    "file": "ui/common-commonCancel01.png",
+    "target": "assets/textures/ui/common/commonCancel01.png",
+    "width": 109,
+    "height": 56
+  },
+  {
+    "file": "ui/common-commonCancel02.png",
+    "target": "assets/textures/ui/common/commonCancel02.png",
+    "width": 151,
+    "height": 49
+  },
+  {
+    "file": "ui/common-commonIconGold.png",
+    "target": "assets/textures/ui/common/commonIconGold.png",
+    "width": 64,
+    "height": 68
+  },
+  {
+    "file": "ui/common-commonImg.png",
+    "target": "assets/textures/ui/common/commonImg.png",
+    "width": 40,
+    "height": 40
+  },
+  {
+    "file": "ui/common-commonImg03.png",
+    "target": "assets/textures/ui/common/commonImg03.png",
+    "width": 110,
+    "height": 68
+  },
+  {
+    "file": "ui/common-commonImg04.png",
+    "target": "assets/textures/ui/common/commonImg04.png",
+    "width": 111,
+    "height": 27
+  },
+  {
+    "file": "ui/common-commonImgTitle1.png",
+    "target": "assets/textures/ui/common/commonImgTitle1.png",
+    "width": 426,
+    "height": 114
+  },
+  {
+    "file": "ui/common-commonImgTitle2.png",
+    "target": "assets/textures/ui/common/commonImgTitle2.png",
+    "width": 581,
+    "height": 146
+  },
+  {
+    "file": "ui/common-commonRectangle03.png",
+    "target": "assets/textures/ui/common/commonRectangle03.png",
+    "width": 206,
+    "height": 146
+  },
+  {
+    "file": "ui/common-commonRectangle04.png",
+    "target": "assets/textures/ui/common/commonRectangle04.png",
+    "width": 182,
+    "height": 48
+  },
+  {
+    "file": "ui/common-commonRectangle05.png",
+    "target": "assets/textures/ui/common/commonRectangle05.png",
+    "width": 72,
+    "height": 76
+  },
+  {
+    "file": "ui/common-commonRectangle07.png",
+    "target": "assets/textures/ui/common/commonRectangle07.png",
+    "width": 116,
+    "height": 112
+  },
+  {
+    "file": "ui/common-commonRectangle08.png",
+    "target": "assets/textures/ui/common/commonRectangle08.png",
+    "width": 200,
+    "height": 200
+  },
+  {
+    "file": "ui/common-commonRectangle09.png",
+    "target": "assets/textures/ui/common/commonRectangle09.png",
+    "width": 200,
+    "height": 200
+  },
+  {
+    "file": "ui/common-commonTitleImg1.png",
+    "target": "assets/textures/ui/common/commonTitleImg1.png",
+    "width": 182,
+    "height": 52
+  },
+  {
+    "file": "ui/common-commonTitleImg2.png",
+    "target": "assets/textures/ui/common/commonTitleImg2.png",
+    "width": 182,
+    "height": 50
+  },
+  {
+    "file": "ui/common-commonTrue01.png",
+    "target": "assets/textures/ui/common/commonTrue01.png",
+    "width": 117,
+    "height": 60
+  },
+  {
+    "file": "ui/common-commonTrue02.png",
+    "target": "assets/textures/ui/common/commonTrue02.png",
+    "width": 68,
+    "height": 52
+  },
+  {
+    "file": "ui/common-diamondImg01.png",
+    "target": "assets/textures/ui/common/diamondImg01.png",
+    "width": 148,
+    "height": 84
+  },
+  {
+    "file": "ui/daily-dailyBtnCheck.png",
+    "target": "assets/textures/ui/daily/dailyBtnCheck.png",
+    "width": 113,
+    "height": 59
+  },
+  {
+    "file": "ui/daily-dailyBtnCheck1.png",
+    "target": "assets/textures/ui/daily/dailyBtnCheck1.png",
+    "width": 113,
+    "height": 59
+  },
+  {
+    "file": "ui/daily-dailyBtnReceive.png",
+    "target": "assets/textures/ui/daily/dailyBtnReceive.png",
+    "width": 113,
+    "height": 59
+  },
+  {
+    "file": "ui/daily-dailyBtnReceive1.png",
+    "target": "assets/textures/ui/daily/dailyBtnReceive1.png",
+    "width": 113,
+    "height": 59
+  },
+  {
+    "file": "ui/daily-dailyImg1.png",
+    "target": "assets/textures/ui/daily/dailyImg1.png",
+    "width": 94,
+    "height": 86
+  },
+  {
+    "file": "ui/daily-dailyImg2.png",
+    "target": "assets/textures/ui/daily/dailyImg2.png",
+    "width": 130,
+    "height": 58
+  },
+  {
+    "file": "ui/daily-dailyImg3.png",
+    "target": "assets/textures/ui/daily/dailyImg3.png",
+    "width": 79,
+    "height": 79
+  },
+  {
+    "file": "ui/daily-dailyImg4.png",
+    "target": "assets/textures/ui/daily/dailyImg4.png",
+    "width": 190,
+    "height": 164
+  },
+  {
+    "file": "ui/daily-dailyImg5.png",
+    "target": "assets/textures/ui/daily/dailyImg5.png",
+    "width": 98,
+    "height": 74
+  },
+  {
+    "file": "ui/daily-dailyImg6.png",
+    "target": "assets/textures/ui/daily/dailyImg6.png",
+    "width": 220,
+    "height": 95
+  },
+  {
+    "file": "ui/daily-dailyImgReceive1.png",
+    "target": "assets/textures/ui/daily/dailyImgReceive1.png",
+    "width": 124,
+    "height": 33
+  },
+  {
+    "file": "ui/daily-dailyImgReceive2.png",
+    "target": "assets/textures/ui/daily/dailyImgReceive2.png",
+    "width": 76,
+    "height": 40
+  },
+  {
+    "file": "ui/daily-dailyImgReceive3.png",
+    "target": "assets/textures/ui/daily/dailyImgReceive3.png",
+    "width": 148,
+    "height": 40
+  },
+  {
+    "file": "ui/daily-dailyImgReceive4.png",
+    "target": "assets/textures/ui/daily/dailyImgReceive4.png",
+    "width": 148,
+    "height": 40
+  },
+  {
+    "file": "ui/daily-dailyTitle.png",
+    "target": "assets/textures/ui/daily/dailyTitle.png",
+    "width": 201,
+    "height": 40
+  },
+  {
+    "file": "ui/daily-dailyTitle2.png",
+    "target": "assets/textures/ui/daily/dailyTitle2.png",
+    "width": 147,
+    "height": 38
+  },
+  {
+    "file": "ui/dialog-01.png",
+    "target": "assets/textures/bg/commonRectangle01.png",
+    "width": 564,
+    "height": 402
+  },
+  {
+    "file": "ui/dialog-02.png",
+    "target": "assets/textures/bg/commonRectangle02.png",
+    "width": 594,
+    "height": 330
+  },
+  {
+    "file": "ui/dialog-06.png",
+    "target": "assets/textures/bg/commonRectangle06.png",
+    "width": 562,
+    "height": 490
+  },
+  {
+    "file": "ui/guide-guideImg01.png",
+    "target": "assets/textures/ui/guide/guideImg01.png",
+    "width": 99,
+    "height": 52
+  },
+  {
+    "file": "ui/guide-guideImg02.png",
+    "target": "assets/textures/ui/guide/guideImg02.png",
+    "width": 125,
+    "height": 56
+  },
+  {
+    "file": "ui/guide.png",
+    "target": "assets/resources/gamePackages/effects/fight/guide/guideBg01.png",
+    "width": 534,
+    "height": 736
+  },
+  {
+    "file": "ui/home-homeBoosters01.png",
+    "target": "assets/textures/ui/home/homeBoosters01.png",
+    "width": 242,
+    "height": 64
+  },
+  {
+    "file": "ui/home-homeBoosters02.png",
+    "target": "assets/textures/ui/home/homeBoosters02.png",
+    "width": 335,
+    "height": 57
+  },
+  {
+    "file": "ui/home-homeButton01.png",
+    "target": "assets/textures/ui/home/homeButton01.png",
+    "width": 96,
+    "height": 96
+  },
+  {
+    "file": "ui/home-homeButton02.png",
+    "target": "assets/textures/ui/home/homeButton02.png",
+    "width": 51,
+    "height": 52
+  },
+  {
+    "file": "ui/home-homeButton03.png",
+    "target": "assets/textures/ui/home/homeButton03.png",
+    "width": 51,
+    "height": 52
+  },
+  {
+    "file": "ui/home-homeButton04.png",
+    "target": "assets/textures/ui/home/homeButton04.png",
+    "width": 39,
+    "height": 61
+  },
+  {
+    "file": "ui/home-homeIconBox.png",
+    "target": "assets/textures/ui/home/homeIconBox.png",
+    "width": 108,
+    "height": 110
+  },
+  {
+    "file": "ui/home-homeImg01.png",
+    "target": "assets/textures/ui/home/homeImg01.png",
+    "width": 284,
+    "height": 60
+  },
+  {
+    "file": "ui/home-homeImg02.png",
+    "target": "assets/textures/ui/home/homeImg02.png",
+    "width": 114,
+    "height": 76
+  },
+  {
+    "file": "ui/home-homeImg03.png",
+    "target": "assets/textures/ui/home/homeImg03.png",
+    "width": 40,
+    "height": 40
+  },
+  {
+    "file": "ui/home-homeImg04.png",
+    "target": "assets/textures/ui/home/homeImg04.png",
+    "width": 58,
+    "height": 50
+  },
+  {
+    "file": "ui/home-homeImg05.png",
+    "target": "assets/textures/ui/home/homeImg05.png",
+    "width": 84,
+    "height": 50
+  },
+  {
+    "file": "ui/home-homeImg06.png",
+    "target": "assets/textures/ui/home/homeImg06.png",
+    "width": 98,
+    "height": 50
+  },
+  {
+    "file": "ui/home-homeImg07.png",
+    "target": "assets/textures/ui/home/homeImg07.png",
+    "width": 118,
+    "height": 118
+  },
+  {
+    "file": "ui/home-homeImg08.png",
+    "target": "assets/textures/ui/home/homeImg08.png",
+    "width": 79,
+    "height": 72
+  },
+  {
+    "file": "ui/home-homeImg09.png",
+    "target": "assets/textures/ui/home/homeImg09.png",
+    "width": 75,
+    "height": 75
+  },
+  {
+    "file": "ui/home-homeImg10.png",
+    "target": "assets/textures/ui/home/homeImg10.png",
+    "width": 74,
+    "height": 73
+  },
+  {
+    "file": "ui/home-homeImg11.png",
+    "target": "assets/textures/ui/home/homeImg11.png",
+    "width": 68,
+    "height": 99
+  },
+  {
+    "file": "ui/home-homeImg12.png",
+    "target": "assets/textures/ui/home/homeImg12.png",
+    "width": 74,
+    "height": 73
+  },
+  {
+    "file": "ui/home-homeImg13.png",
+    "target": "assets/textures/ui/home/homeImg13.png",
+    "width": 68,
+    "height": 99
+  },
+  {
+    "file": "ui/home-homeImg15.png",
+    "target": "assets/textures/ui/home/homeImg15.png",
+    "width": 40,
+    "height": 40
+  },
+  {
+    "file": "ui/home-homeImg16.png",
+    "target": "assets/textures/ui/home/homeImg16.png",
+    "width": 47,
+    "height": 41
+  },
+  {
+    "file": "ui/home-homeLightBar01.png",
+    "target": "assets/textures/ui/home/homeLightBar01.png",
+    "width": 136,
+    "height": 34
+  },
+  {
+    "file": "ui/home-homeMoves01.png",
+    "target": "assets/textures/ui/home/homeMoves01.png",
+    "width": 261,
+    "height": 63
+  },
+  {
+    "file": "ui/home-homeMoves02.png",
+    "target": "assets/textures/ui/home/homeMoves02.png",
+    "width": 369,
+    "height": 57
+  },
+  {
+    "file": "ui/home-homeMoves03.png",
+    "target": "assets/textures/ui/home/homeMoves03.png",
+    "width": 108,
+    "height": 54
+  },
+  {
+    "file": "ui/home-homeMoves04.png",
+    "target": "assets/textures/ui/home/homeMoves04.png",
+    "width": 130,
+    "height": 37
+  },
+  {
+    "file": "ui/home-homeMoves05.png",
+    "target": "assets/textures/ui/home/homeMoves05.png",
+    "width": 67,
+    "height": 35
+  },
+  {
+    "file": "ui/home-homeMoves06.png",
+    "target": "assets/textures/ui/home/homeMoves06.png",
+    "width": 90,
+    "height": 23
+  },
+  {
+    "file": "ui/home-homeMoves07.png",
+    "target": "assets/textures/ui/home/homeMoves07.png",
+    "width": 267,
+    "height": 69
+  },
+  {
+    "file": "ui/home-homeMoves08.png",
+    "target": "assets/textures/ui/home/homeMoves08.png",
+    "width": 202,
+    "height": 58
+  },
+  {
+    "file": "ui/home-homeScore01.png",
+    "target": "assets/textures/ui/home/homeScore01.png",
+    "width": 65,
+    "height": 35
+  },
+  {
+    "file": "ui/home-homeScore02.png",
+    "target": "assets/textures/ui/home/homeScore02.png",
+    "width": 75,
+    "height": 22
+  },
+  {
+    "file": "ui/home-homeSetting01.png",
+    "target": "assets/textures/ui/home/homeSetting01.png",
+    "width": 116,
+    "height": 61
+  },
+  {
+    "file": "ui/home-homeSetting02.png",
+    "target": "assets/textures/ui/home/homeSetting02.png",
+    "width": 110,
+    "height": 52
+  },
+  {
+    "file": "ui/home-homeStar01.png",
+    "target": "assets/textures/ui/home/homeStar01.png",
+    "width": 83,
+    "height": 82
+  },
+  {
+    "file": "ui/home-homeStar02.png",
+    "target": "assets/textures/ui/home/homeStar02.png",
+    "width": 68,
+    "height": 66
+  },
+  {
+    "file": "ui/home-homeStarBar01.png",
+    "target": "assets/textures/ui/home/homeStarBar01.png",
+    "width": 88,
+    "height": 34
+  },
+  {
+    "file": "ui/lottery-lotteryBtn1.png",
+    "target": "assets/textures/ui/lottery/lotteryBtn1.png",
+    "width": 191,
+    "height": 191
+  },
+  {
+    "file": "ui/lottery-lotteryBtn2.png",
+    "target": "assets/textures/ui/lottery/lotteryBtn2.png",
+    "width": 191,
+    "height": 191
+  },
+  {
+    "file": "ui/lottery-lotteryIconClose.png",
+    "target": "assets/textures/ui/lottery/lotteryIconClose.png",
+    "width": 100,
+    "height": 106
+  },
+  {
+    "file": "ui/lottery-lotteryImg3.png",
+    "target": "assets/textures/ui/lottery/lotteryImg3.png",
+    "width": 171,
+    "height": 273
+  },
+  {
+    "file": "ui/lottery-lotteryImg4.png",
+    "target": "assets/textures/ui/lottery/lotteryImg4.png",
+    "width": 227,
+    "height": 291
+  },
+  {
+    "file": "ui/lottery-lotteryImgGo1.png",
+    "target": "assets/textures/ui/lottery/lotteryImgGo1.png",
+    "width": 100,
+    "height": 61
+  },
+  {
+    "file": "ui/lottery-lotteryImgGo2.png",
+    "target": "assets/textures/ui/lottery/lotteryImgGo2.png",
+    "width": 104,
+    "height": 53
+  },
+  {
+    "file": "ui/lottery-lotteryImgPlay.png",
+    "target": "assets/textures/ui/lottery/lotteryImgPlay.png",
+    "width": 89,
+    "height": 62
+  },
+  {
+    "file": "ui/lottery-lotteryTitle01.png",
+    "target": "assets/textures/ui/lottery/lotteryTitle01.png",
+    "width": 360,
+    "height": 105
+  },
+  {
+    "file": "ui/lottery-lotteryTitle02.png",
+    "target": "assets/textures/ui/lottery/lotteryTitle02.png",
+    "width": 408,
+    "height": 95
+  },
+  {
+    "file": "ui/prop-001.png",
+    "target": "assets/resources/gamePackages/textures/icons/props/001.png",
+    "width": 84,
+    "height": 84
+  },
+  {
+    "file": "ui/prop-002.png",
+    "target": "assets/resources/gamePackages/textures/icons/props/002.png",
+    "width": 84,
+    "height": 84
+  },
+  {
+    "file": "ui/prop-003.png",
+    "target": "assets/resources/gamePackages/textures/icons/props/003.png",
+    "width": 84,
+    "height": 84
+  },
+  {
+    "file": "ui/prop-004.png",
+    "target": "assets/resources/gamePackages/textures/icons/props/004.png",
+    "width": 84,
+    "height": 84
+  },
+  {
+    "file": "ui/PVE-pveIconDaily.png",
+    "target": "assets/textures/ui/PVE/pveIconDaily.png",
+    "width": 87,
+    "height": 111
+  },
+  {
+    "file": "ui/PVE-pveIconLottery.png",
+    "target": "assets/textures/ui/PVE/pveIconLottery.png",
+    "width": 95,
+    "height": 125
+  },
+  {
+    "file": "ui/PVE-pveIconShop.png",
+    "target": "assets/textures/ui/PVE/pveIconShop.png",
+    "width": 124,
+    "height": 118
+  },
+  {
+    "file": "ui/PVE-pveIconUser.png",
+    "target": "assets/textures/ui/PVE/pveIconUser.png",
+    "width": 127,
+    "height": 155
+  },
+  {
+    "file": "ui/PVE-pveIconUser1.png",
+    "target": "assets/textures/ui/PVE/pveIconUser1.png",
+    "width": 104,
+    "height": 104
+  },
+  {
+    "file": "ui/PVE-pveImgLight.png",
+    "target": "assets/textures/ui/PVE/pveImgLight.png",
+    "width": 151,
+    "height": 96
+  },
+  {
+    "file": "ui/PVE-pveImgPoint1.png",
+    "target": "assets/textures/ui/PVE/pveImgPoint1.png",
+    "width": 108,
+    "height": 63
+  },
+  {
+    "file": "ui/PVE-pveImgPoint2.png",
+    "target": "assets/textures/ui/PVE/pveImgPoint2.png",
+    "width": 108,
+    "height": 63
+  },
+  {
+    "file": "ui/PVE-pveImgPoint3.png",
+    "target": "assets/textures/ui/PVE/pveImgPoint3.png",
+    "width": 74,
+    "height": 56
+  },
+  {
+    "file": "ui/PVE-pveImgTime.png",
+    "target": "assets/textures/ui/PVE/pveImgTime.png",
+    "width": 108,
+    "height": 27
+  },
+  {
+    "file": "ui/PVE-pveSets01.png",
+    "target": "assets/textures/ui/PVE/pveSets01.png",
+    "width": 64,
+    "height": 64
+  },
+  {
+    "file": "ui/PVE-pveStar1.png",
+    "target": "assets/textures/ui/PVE/pveStar1.png",
+    "width": 32,
+    "height": 32
+  },
+  {
+    "file": "ui/PVE-pveStar2.png",
+    "target": "assets/textures/ui/PVE/pveStar2.png",
+    "width": 32,
+    "height": 32
+  },
+  {
+    "file": "ui/result-panel.png",
+    "target": "assets/textures/bg/balanceImg04.png",
+    "width": 562,
+    "height": 496
+  },
+  {
+    "file": "ui/shop-shopImgBuy01.png",
+    "target": "assets/textures/ui/shop/shopImgBuy01.png",
+    "width": 100,
+    "height": 52
+  },
+  {
+    "file": "ui/shop-shopImgBuy02.png",
+    "target": "assets/textures/ui/shop/shopImgBuy02.png",
+    "width": 84,
+    "height": 55
+  },
+  {
+    "file": "ui/tips-01.png",
+    "target": "assets/textures/ui/home/homeImgTips1.png",
+    "width": 280,
+    "height": 280
+  },
+  {
+    "file": "ui/tips-02.png",
+    "target": "assets/textures/ui/home/homeImgTips2.png",
+    "width": 280,
+    "height": 280
+  },
+  {
+    "file": "ui/tips-03.png",
+    "target": "assets/textures/ui/home/homeImgTips3.png",
+    "width": 280,
+    "height": 280
+  },
+  {
+    "file": "ui/tips-04.png",
+    "target": "assets/textures/ui/home/homeImgTips4.png",
+    "width": 280,
+    "height": 280
+  }
+]

@@ -5,6 +5,7 @@ import { clientEvent } from './clientEvent';
 import { constants } from '../shared/constants';
 import { uiManager } from './uiManager';
 import { SceneManager } from '../ui/loading/sceneManager';
+import { gameBrand } from '../shared/gameBrand';
 const { ccclass, property } = _decorator;
 
 @ccclass('GameLogic')
@@ -35,7 +36,7 @@ export class GameLogic {
         // 设置转发内容
         wx.onShareAppMessage(() => {
             return {
-                title: '果连萌 - 一起来消除吧！',
+                title: gameBrand.shareTitle,
             };
         });
     }

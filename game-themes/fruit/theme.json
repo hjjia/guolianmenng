@@ -1,0 +1,14 @@
+{
+  "id": "fruit",
+  "displayName": "果连萌",
+  "projectName": "FruitCrash",
+  "gameId": "fruit",
+  "pieceCount": 8,
+  "shareTitle": "果连萌 - 一起来消除吧！",
+  "platforms": {
+    "wechatgame": { "appId": "wx12a0d05cd5701cf0" },
+    "bytedance-mini-game": { "appId": null }
+  },
+  "version": 1,
+  "description": "从当前工程抽取的完整基础美术。所有其他主题切换前都会先恢复此主题。"
+}

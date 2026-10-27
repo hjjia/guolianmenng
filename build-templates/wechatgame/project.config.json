@@ -1,35 +1,35 @@
 {
-    "description": "项目配置文件。",
-    "miniprogramRoot": "./",
-    "setting": {
-        "urlCheck": true,
-        "postcss": true,
-        "minified": true,
-        "newFeature": false,
-        "enhance": true,
-        "useIsolateContext": true
+  "description": "项目配置文件。",
+  "miniprogramRoot": "./",
+  "setting": {
+    "urlCheck": true,
+    "postcss": true,
+    "minified": true,
+    "newFeature": false,
+    "enhance": true,
+    "useIsolateContext": true
+  },
+  "compileType": "game",
+  "libVersion": "3.5.8",
+  "appid": "",
+  "projectname": "萌宠消消岛",
+  "condition": {
+    "search": {
+      "current": -1,
+      "list": []
     },
-    "compileType": "game",
-    "libVersion": "3.5.8",
-    "appid": "wx12a0d05cd5701cf0",
-    "projectname": "",
-    "condition": {
-        "search": {
-            "current": -1,
-            "list": []
-        },
-        "conversation": {
-            "current": -1,
-            "list": []
-        },
-        "game": {
-            "currentL": -1,
-            "list": [],
-            "current": -1
-        },
-        "miniprogram": {
-            "current": -1,
-            "list": []
-        }
+    "conversation": {
+      "current": -1,
+      "list": []
+    },
+    "game": {
+      "currentL": -1,
+      "list": [],
+      "current": -1
+    },
+    "miniprogram": {
+      "current": -1,
+      "list": []
     }
+  }
 }
