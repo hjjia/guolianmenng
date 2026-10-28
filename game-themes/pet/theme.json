@@ -4,9 +4,10 @@
   "projectName": "PetCrush",
   "gameId": "pet",
   "pieceCount": 8,
+  "pieceName": "萌宠图案",
   "shareTitle": "萌宠消消岛 - 一起来消除吧！",
   "platforms": {
-    "wechatgame": { "appId": null },
+    "wechatgame": { "appId": "wx7bb2ef591ae44305" },
     "bytedance-mini-game": { "appId": null }
   },
   "version": 1,

@@ -2,6 +2,8 @@
 
 一个主题由美术素材和游戏身份配置组成。美术人员只需使用 `game-themes/<主题ID>/` 下的分类目录；项目内的 Cocos 路径和 `.meta` 文件由切换脚本维护。
 
+各主题的上架表单文案和平台提交资料统一记录在 [上架文案.md](上架文案.md)。
+
 ## 目录和命名
 
 ```text
@@ -44,6 +46,7 @@ game-themes/pet/
   "projectName": "PetCrush",
   "gameId": "pet",
   "pieceCount": 8,
+  "pieceName": "萌宠图案",
   "shareTitle": "萌宠消消岛 - 一起来消除吧！",
   "platforms": {
     "wechatgame": { "appId": null },
@@ -55,6 +58,7 @@ game-themes/pet/
 - `id` 是主题目录名；`gameId` 是游戏内部身份，用于区分本地存档。已发布后不要随意更改。
 - `displayName` 是游戏显示名；`projectName` 是编辑器工程名；`shareTitle` 是微信分享标题。
 - `pieceCount` 是随机关卡可用的棋子编号上限，至少为 8，不得大于主题实际提供的连续棋子数量。
+- `pieceName` 是玩家在道具说明里看到的对象称呼，例如水果主题填“水果”，萌宠主题填“萌宠图案”；以后新增主题时也要填写，切换主题会同步更新这些说明。
 - 微信 AppID 和字节 AppID 是两个独立值。申请到后填入对应平台；未知时写 `null`。切换主题会清空该平台遗留的旧 AppID，并在终端提醒填写，避免把萌宠误发到水果游戏账号。
 - 一个主题只有一份 `theme.json`，其中 `platforms.wechatgame.appId` 和 `platforms["bytedance-mini-game"].appId` 分别管理两个平台。填写后运行 `npm run select:<主题ID>`，脚本会将两个值分别写入对应平台的 Cocos 构建配置；在编辑器 Build 面板再选择微信小游戏或字节小游戏。不需要在切换主题时指定平台。AppID 请改在 `theme.json`，不要只改编辑器中的临时值；切换主题会重新写入配置。
 - `package.json` 里的项目 UUID 属于 Cocos 工程，多个主题共用这一工程；它不是平台 AppID。
@@ -66,7 +70,9 @@ game-themes/pet/
 
 `publishing/icon-512.png` 是申请/上传微信或字节小游戏时供平台使用的**方形应用图标**；它不会自动替换游戏内 Logo，也不会被 Cocos 打进场景。每个平台的实际上传规格应以其后台要求为准。
 
-萌宠资料目前只有方形应用图标，没有 599×272 的游戏内横幅；待美术提供后放入 `branding/logo.png` 和 `branding/logo-en.png`。在此之前切换萌宠会提示登录界面仍显示水果版 Logo。
+微信游戏审核用的实机截图也可按 `wechat-scene-01.png` 等名称放在同一主题的 `publishing/` 目录。该目录接受 JPG、JPEG、PNG 图片，不参与游戏资源同步或打包；截图具体要求见 [上架文案.md](上架文案.md)。
+
+萌宠主题现已提供 `branding/logo.png`、`branding/logo-en.png` 和 `branding/editor-splash.png`，分别用于中文横幅、英文横幅和构建启动图。
 
 萌宠登录背景来自源资料中的 `assets/loginBg.jpg`，原图 1024×1826；已转换为 `branding/login-bg.jpg` 的 720×1280，约从 601 KiB 降至 186 KiB。以后交付登录背景请优先提供 720×1280 JPG。
 
@@ -86,14 +92,26 @@ npm run select:fruit
 
 `npm run theme:list` 可以查看主题；`npm run theme:validate -- pet` 只校验资源，不同步。新增主题时，可参照本机 `/Users/jia/Documents/图片资料/萌宠消消岛/` 的独立交付包，在其同级目录生成新游戏文件夹。文件夹中的 `主题资源/` 与 `game-themes/<主题ID>/` 同结构；在工程根目录运行 `npm run theme:import -- "/完整路径/新游戏文件夹"`，脚本会复制、校验并切换。交付文件夹可以叫中文名，但目标目录使用 `主题资源/theme.json` 的英文 `id`：例如 `海洋消消乐/` 中 `"id": "ocean"`，会导入 `game-themes/ocean/`，并自动添加 `npm run select:ocean`。方形图标的各个尺寸保留在交付包的 `logo-sizes/`，只有 512 PNG 同步到主题的 `publishing/icon-512.png`。
 
-`select` 会自动从水果基础主题和当前主题中选出要使用的图片，在临时目录压缩，再将压缩版直接同步到 Cocos 的 `assets/` 目标目录；主题目录里的原图保持不变。压缩文件名、格式和像素尺寸均保持一致。脚本只接受节省至少 15%、平均可见颜色误差不超过 2.5/255 且透明度误差通过检查的压缩版；其他图片按原图复制。再次切换时会从原图重新生成，发现画质问题可以调整压缩规则并重新切换。`npm run theme:optimize -- pet --balanced` 可只预估压缩收益，不修改任何资源。脚本需要本机安装 `ffmpeg`。最终小游戏包体大小仍要以 Cocos 针对目标平台的构建结果为准。
+### 同一平台保留多套构建包
 
-当前执行 `npm run select:pet`，所选图片和音频原图约 9.07 MiB，压缩并同步到工程后约 7.70 MiB。`publishing/icon-512.png` 不属于游戏内资源，不计入这两项。萌宠仍复用约 5.54 MiB 的水果主题资源，其中不少是半透明特效，压缩后误差较大，脚本会保留原图。若实际构建包体仍超限，需要结合构建结果逐项处理这些共享资源或拆分资源包。
+切换主题后，在 Cocos **Build Path 右侧的输出名输入框**手动填写 `<主题ID>-<平台>`。Cocos 新建任务时可能自动生成 `wechatgame-001` 之类的名称；`select` 无法替新任务锁定这个输入框。`Name` 是游戏名称，不是输出目录名。构建路径左侧保持项目的 `build/` 即可。例如：
+
+| 操作 | Cocos 构建平台 | 输出目录 |
+| --- | --- | --- |
+| `npm run select:fruit` 后构建 | 微信小游戏 | `build/fruit-wechatgame/` |
+| `npm run select:pet` 后构建 | 微信小游戏 | `build/pet-wechatgame/` |
+| `npm run select:pet` 后构建 | 字节小游戏 | `build/pet-bytedance-mini-game/` |
+
+每次切换主题时，先关闭 Cocos Creator，执行对应的 `select` 命令，再打开编辑器，在 **Build 面板新建构建任务**、选择平台，把 Build Path 右侧的输出名改为表中的名称后构建。不要直接点旧构建任务的“重新构建”；旧任务保存了上一次的构建参数，可能仍指向旧目录。两个主题的同平台目录互不覆盖。`build/` 已被 Git 忽略，需长期留存或交付时请另行备份构建包；同一主题、同一平台再次构建会更新它自己的目录。平台 AppID 仍取当前主题 `theme.json` 中的对应值。
+
+`select` 会自动从水果基础主题和当前主题中选出要使用的图片，在临时目录压缩，再将压缩版直接同步到 Cocos 的 `assets/` 目标目录；主题目录里的原图保持不变。压缩文件名、格式和像素尺寸均保持一致。对 PNG 会比较调色板压缩和保留完整透明度的轻量颜色量化，选取满足画质检查且体积更小的版本；JPEG 也会进行检查。脚本只接受节省至少 15%、平均可见颜色误差不超过 2.5/255 且透明度误差通过检查的压缩版；其他图片按原图复制。再次切换时会从原图重新生成，发现画质问题可以调整压缩规则并重新切换。`npm run theme:optimize -- pet --balanced` 可只预估压缩收益，不修改任何资源。脚本需要本机安装 `ffmpeg`。最终小游戏包体大小仍要以 Cocos 针对目标平台的构建结果为准。
+
+当前执行 `npm run select:pet`，所选图片和音频原图约 10.01 MiB，压缩并同步到工程后约 6.96 MiB。`publishing/icon-512.png` 不属于游戏内资源，不计入这两项。萌宠仍复用部分水果主题资源；未通过画质检查的图片会保留原图。若实际构建包体仍超限，需要结合构建结果逐项处理主包资源或拆分资源包。
 
 切换时，脚本对每个基础槽位选用该主题图片或 `fruit` 图片，以防上一个主题的图片残留。直接改 `assets/` 下这些图片会在下次切换时被主题源文件覆盖；基础美术修改应同步改 `game-themes/fruit/`。
 
 ## 萌宠示例的来源与范围
 
-萌宠素材原稿保存在 `/Users/jia/Documents/图片资料/萌宠消消岛/原始资料/pet-theme-v2`；可交给大模型的独立交付目录为同级 `萌宠消消岛/`，其中 `主题资源/` 与本工程 `game-themes/pet/` 对应，详细出图要求见该目录的 `README.md`。32 组 86×86 / 100×100 棋子、登录背景、其他场景背景、弹窗和提示图已接入。原始资料中的 224×224 大头像、合成图和 ZIP 是另外一套导出，不作为棋子重复打包。游戏内横幅 Logo 和平台 AppID 待提供。
+萌宠素材原稿保存在 `/Users/jia/Documents/图片资料/萌宠消消岛/原始资料/pet-theme-v2`；可交给大模型的独立交付目录为同级 `萌宠消消岛/`，其中 `主题资源/` 与本工程 `game-themes/pet/` 对应，详细出图要求见该目录的 `README.md`。32 组 86×86 / 100×100 棋子、登录背景、Logo、其他场景背景、弹窗和提示图已接入。原始资料中的 224×224 大头像、合成图和 ZIP 是另外一套导出，不作为棋子重复打包。微信 AppID 已配置，字节小游戏 AppID 仍待提供。
 
 `pet` 中的 `common-commonImgTitle1/2.png`、`bonusTimeImg02.png` 和三个 `homeImg02.png` 槽位，目前是从 `fruit` 复制的**待重画参考图**，不代表已完成萌宠美术。`common-commonRectangle09.png` 是无水果元素的共用蓝紫色底板，`fight-showTarget-homeImg03.png` 是通用小圆点，本次均无需重画。`showTargetCake.prefab` 和 `linkItem.prefab` 的默认 `cake01` 已直接引用 `pieces/cake01.png`；无需单独生成动画目录的 `cake01`。重复图片关系、用途和尺寸见原图目录的 `待重画清单.md`。

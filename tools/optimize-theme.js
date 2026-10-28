@@ -7,8 +7,8 @@ const { spawnSync } = require('child_process');
 
 const root = path.resolve(__dirname, '..');
 
-function run(command, args, maxBuffer = 128 * 1024 * 1024) {
-    const result = spawnSync(command, args, { encoding: null, maxBuffer });
+function run(command, args, maxBuffer = 128 * 1024 * 1024, input) {
+    const result = spawnSync(command, args, { encoding: null, maxBuffer, input });
     if (result.error || result.status !== 0) {
         throw new Error(`${command} 执行失败：${result.error?.message || result.stderr.toString('utf8')}`);
     }
@@ -46,6 +46,28 @@ function imageError(original, candidate) {
     };
 }
 
+function quantizePngColors(file, candidate) {
+    const header = fs.readFileSync(file);
+    const width = header.readUInt32BE(16);
+    const height = header.readUInt32BE(20);
+    const pixels = decodedPixels(file);
+    if (pixels.length !== width * height * 4) {
+        throw new Error(`PNG 像素尺寸不匹配：${path.relative(root, file)}`);
+    }
+
+    // 保留全部 8 位透明度，只把 RGB 调整到相邻的 4 级色值；全透明像素清除不可见颜色。
+    for (let offset = 0; offset < pixels.length; offset += 4) {
+        for (let channel = 0; channel < 3; channel++) {
+            pixels[offset + channel] = pixels[offset + 3] === 0
+                ? 0
+                : Math.min(255, Math.round(pixels[offset + channel] / 4) * 4);
+        }
+    }
+    run('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-f', 'rawvideo', '-pix_fmt', 'rgba',
+        '-s', `${width}x${height}`, '-i', 'pipe:0', '-frames:v', '1',
+        '-compression_level', '9', '-pred', 'mixed', candidate], 128 * 1024 * 1024, pixels);
+}
+
 function optimizeFiles(files, tempDirectory, balanced = true) {
     const optimizedSources = new Map();
     let originalBytes = 0;
@@ -59,11 +81,15 @@ function optimizeFiles(files, tempDirectory, balanced = true) {
 
         const isPng = file.toLowerCase().endsWith('.png');
         const candidate = path.join(tempDirectory, `candidate-${index}${isPng ? '.png' : '.jpg'}`);
+        const candidates = [candidate];
         if (isPng) {
             if (balanced) {
                 run('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-i', file,
                     '-filter_complex', 'split[a][b];[a]palettegen=max_colors=256:reserve_transparent=1:transparency_color=000000[p];[b][p]paletteuse=dither=bayer:bayer_scale=5',
                     '-frames:v', '1', '-compression_level', '9', candidate]);
+                const rgbaCandidate = path.join(tempDirectory, `candidate-${index}-rgba4.png`);
+                quantizePngColors(file, rgbaCandidate);
+                candidates.push(rgbaCandidate);
             } else {
                 run('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-i', file, '-frames:v', '1', '-compression_level', '9', '-pred', 'mixed', candidate]);
             }
@@ -75,20 +101,28 @@ function optimizeFiles(files, tempDirectory, balanced = true) {
             }
         }
 
-        const optimizedSize = fs.statSync(candidate).size;
-        if (optimizedSize >= originalSize) continue;
-        if (balanced) {
-            if (optimizedSize > originalSize * 0.85) continue;
-            const error = imageError(file, candidate);
-            if (!error || error.visibleMae > 2.5 || error.alphaMae > 1 || error.severeAlphaFraction > 0.01) continue;
-        } else if (isPng && !decodedPixels(file).equals(decodedPixels(candidate))) {
-            throw new Error(`PNG 像素校验失败，原文件未更改：${path.relative(themeDirectory, file)}`);
+        let bestCandidate;
+        let bestSize = originalSize;
+        for (const current of candidates) {
+            const size = fs.statSync(current).size;
+            if (size >= bestSize) continue;
+            if (balanced) {
+                if (size > originalSize * 0.85) continue;
+                const error = imageError(file, current);
+                if (!error || error.visibleMae > 2.5 || error.alphaMae > 1 || error.severeAlphaFraction > 0.01) continue;
+            } else if (isPng && !decodedPixels(file).equals(decodedPixels(current))) {
+                throw new Error(`PNG 像素校验失败，原文件未更改：${path.relative(root, file)}`);
+            }
+            bestCandidate = current;
+            bestSize = size;
         }
 
+        if (!bestCandidate) continue;
+
         // 压缩结果只放临时目录。主题目录始终保留交付原图。
-        optimizedSources.set(file, candidate);
-        savedBytes += originalSize - optimizedSize;
-        optimizedFiles.push({ file, savedBytes: originalSize - optimizedSize });
+        optimizedSources.set(file, bestCandidate);
+        savedBytes += originalSize - bestSize;
+        optimizedFiles.push({ file, savedBytes: originalSize - bestSize });
     }
     return { optimizedSources, originalBytes, savedBytes, optimizedFiles };
 }

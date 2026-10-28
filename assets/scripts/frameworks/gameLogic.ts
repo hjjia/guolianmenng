@@ -168,7 +168,7 @@ export class GameLogic {
     share(funStr: any, objQuery: any, callback: any, isShowConfirmAfterFailed?: any) {
         if (typeof wx !== 'undefined') {
             wx.shareAppMessage({
-                title: '果连萌 - 一起来消除吧！',
+                title: gameBrand.shareTitle,
                 query: objQuery ? Object.keys(objQuery).map((k: string) => k + '=' + objQuery[k]).join('&') : '',
             });
         }

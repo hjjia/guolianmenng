@@ -4,6 +4,7 @@
   "projectName": "FruitCrash",
   "gameId": "fruit",
   "pieceCount": 8,
+  "pieceName": "水果",
   "shareTitle": "果连萌 - 一起来消除吧！",
   "platforms": {
     "wechatgame": { "appId": "wx12a0d05cd5701cf0" },

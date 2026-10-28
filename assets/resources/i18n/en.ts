@@ -53,9 +53,9 @@ export const languages = {
         "魔法棒": "Magic",
         "刷新": "Refresh",
         "无限": "infinite",
-        "消除选择的1个水果，每局限用3个": "Remove the selected fruit. 3 times each game.",
-        "赋予选择的1个水果直线特效，每局限用1个": "Give the fruit a straight line effect. 1 time each game.",
-        "重新排列游戏区内所有水果，每局限用3次": "Refresh all fruits. 3 times each game.",
+        "消除选择的1个棋子，每局限用3个": "Remove the selected piece. 3 times each game.",
+        "赋予选择的1个棋子直线特效，每局限用1个": "Give the selected piece a straight line effect. 1 time each game.",
+        "重新排列游戏区内所有棋子，每局限用3次": "Shuffle all pieces. 3 times each game.",
         "使用后本关不再限制游戏步数,每局限用1个": "The steps will be infinite, 1 times each game.",
     },
 

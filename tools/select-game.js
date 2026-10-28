@@ -89,6 +89,9 @@ function getTheme(themeId) {
     if (!Number.isInteger(config.pieceCount) || config.pieceCount < 8 || config.pieceCount > 999) {
         fail(`${themeId}/theme.json 的 pieceCount 必须是 8～999 的整数（随机关卡至少使用 8 种）`);
     }
+    if (typeof config.pieceName !== 'string' || !config.pieceName.trim() || config.pieceName.length > 10) {
+        fail(`${themeId}/theme.json 的 pieceName 必须是 1～10 字的显示称呼，例如“水果”或“萌宠图案”`);
+    }
     if (!config.displayName || !config.shareTitle || !config.projectName) {
         fail(`${themeId}/theme.json 需要 displayName、shareTitle 和 projectName`);
     }
@@ -199,7 +202,8 @@ function validateTheme(theme, slots, requireAll) {
         for (const entry of fs.readdirSync(folderPath, { withFileTypes: true })) {
             if (entry.name === '.DS_Store') continue;
             const relative = `${folder.name}/${entry.name}`;
-            if (!entry.isFile() || !allowed.has(relative)) {
+            const publishingImage = folder.name === 'publishing' && /\.(png|jpe?g)$/i.test(entry.name);
+            if (!entry.isFile() || (!allowed.has(relative) && !publishingImage)) {
                 errors.push(`未登记的文件或目录：${relative}`);
             }
         }
@@ -222,6 +226,10 @@ function validateTheme(theme, slots, requireAll) {
     }
 
     return files;
+}
+
+function outputNameFor(themeId, platform) {
+    return `${themeId}-${platform}`;
 }
 
 function updatePlatformConfig(filePath, platform, appId, displayName, gameId) {
@@ -248,14 +256,15 @@ function writeTextIfChanged(filePath, content) {
 }
 
 function updateGameIdentity(theme) {
-    const { gameId, displayName, shareTitle, projectName, pieceCount, platforms } = theme.config;
+    const { gameId, displayName, shareTitle, projectName, pieceCount, pieceName, platforms } = theme.config;
     const brandSource = [
         '// 由 npm run select:<主题> 根据 game-themes/<主题>/theme.json 更新。',
-        'export const gameBrand: { id: string; displayName: string; shareTitle: string; pieceCount: number } = {',
+        'export const gameBrand: { id: string; displayName: string; shareTitle: string; pieceCount: number; pieceName: string } = {',
         `    id: ${JSON.stringify(gameId)},`,
         `    displayName: ${JSON.stringify(displayName)},`,
         `    shareTitle: ${JSON.stringify(shareTitle)},`,
         `    pieceCount: ${pieceCount},`,
+        `    pieceName: ${JSON.stringify(pieceName.trim())},`,
         '};',
         '',
     ].join('\n');
@@ -437,6 +446,7 @@ try {
 console.log(`主题已切换为：${selectedTheme.config.displayName || themeId}`);
 console.log(`图片自动压缩 ${optimizedResult.optimizedFiles.length} 张；原图/音频 ${(sourceMediaBytes / 1024 / 1024).toFixed(2)} MiB，同步到工程后 ${(selectedMediaBytes / 1024 / 1024).toFixed(2)} MiB`);
 console.log(`已检查 ${baseFiles.length} 个基础槽位；主题覆盖 ${regularFiles.length} 个，另有 ${extraFiles.length} 张附加棋子，实际更新 ${updatedFiles} 个文件`);
+console.log(`建议在 Cocos Build Path 右侧填写输出名：${Object.keys(platformFiles).map((platform) => outputNameFor(themeId, platform)).join('、')}（默认位于 build/）`);
 console.log('最终包体以 Cocos 构建结果为准。');
 for (const [platform, config] of Object.entries(selectedTheme.config.platforms)) {
     if (!config.appId) console.warn(`提醒：${platform} AppID 尚未填写，正式构建前请填写 ${themeId}/theme.json`);
