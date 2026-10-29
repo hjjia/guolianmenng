@@ -114,4 +114,4 @@ npm run select:fruit
 
 萌宠素材原稿保存在 `/Users/jia/Documents/图片资料/萌宠消消岛/原始资料/pet-theme-v2`；可交给大模型的独立交付目录为同级 `萌宠消消岛/`，其中 `主题资源/` 与本工程 `game-themes/pet/` 对应，详细出图要求见该目录的 `README.md`。32 组 86×86 / 100×100 棋子、登录背景、Logo、其他场景背景、弹窗和提示图已接入。原始资料中的 224×224 大头像、合成图和 ZIP 是另外一套导出，不作为棋子重复打包。微信 AppID 已配置，字节小游戏 AppID 仍待提供。
 
-`pet` 中的 `common-commonImgTitle1/2.png`、`bonusTimeImg02.png` 和三个 `homeImg02.png` 槽位，目前是从 `fruit` 复制的**待重画参考图**，不代表已完成萌宠美术。`common-commonRectangle09.png` 是无水果元素的共用蓝紫色底板，`fight-showTarget-homeImg03.png` 是通用小圆点，本次均无需重画。`showTargetCake.prefab` 和 `linkItem.prefab` 的默认 `cake01` 已直接引用 `pieces/cake01.png`；无需单独生成动画目录的 `cake01`。重复图片关系、用途和尺寸见原图目录的 `待重画清单.md`。
+`pet` 中的 `common-commonImgTitle1/2.png`、`bonusTimeImg02.png` 和三个 `homeImg02.png` 槽位现已与水果原图不同；三个 `homeImg02.png` 使用同一张萌宠小窝图。`common-commonRectangle09.png` 是通用底板，`fight-showTarget-homeImg03.png` 是通用小圆点，本次均无需重画。`showTargetCake.prefab` 和 `linkItem.prefab` 的默认 `cake01` 已直接引用 `pieces/cake01.png`；无需单独生成动画目录的 `cake01`。开始按钮、地图入口、转盘、默认头像、人物动画、签到、道具和商店购买文字等 36 张可见 UI 原图已按槽位复制到 `pet/`，并同步到独立交付包；这些文件目前仍是**水果版参考图**，生成新主题时应重新设计，不能当作已完成的萌宠美术。通用特效继续由基础主题复用。
