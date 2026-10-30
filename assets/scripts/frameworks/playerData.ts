@@ -228,6 +228,14 @@ export class playerData extends Component {
     }
 
     /**
+     * 立即把玩家数据写入本地存储，供奖励领取等不能延迟保存的操作使用。
+     */
+    public flushLocalCache() {
+        this.saveAll();
+        StorageManager.instance.save();
+    }
+
+    /**
      * 更新用户信息
      * 例如钻石、金币、道具
      * @param {String} key
@@ -297,23 +305,35 @@ export class playerData extends Component {
     }
 
     /**
-     * 与上次登录时间超过一定分钟，就可以再次领取离线奖励。
-     * @param checkRewardTime 
-     * @returns 
+     * 离线达到门槛且今天尚未展示过奖励时返回 true。
+     * 展示日期在这里立即记录，避免同一天重复登录反复弹窗。
      */
     public isOpenOffLineReward(checkRewardTime: any) {
         let now = Date.now();
-        let isOpen = false;
-        if (!this.playerInfo.loginDate) {
-            this.playerInfo.loginDate = Date.now();
-        } else {
-            isOpen = now - this.playerInfo.loginDate >= checkRewardTime;
-            if (isOpen) {
-                this.playerInfo.loginDate = now;
-            }
+        const lastHideTime = Number(this.settings && this.settings.hideTime);
+        const lastLoginTime = Number(this.playerInfo.loginDate);
+        const offlineStartTime = lastHideTime || lastLoginTime;
+        const lastRewardTime = Number(this.playerInfo.offlineRewardDate);
+        const lastRewardDate = lastRewardTime ? new Date(lastRewardTime) : null;
+        const nowDate = new Date(now);
+        const hasShownToday = !!lastRewardDate &&
+            lastRewardDate.getFullYear() === nowDate.getFullYear() &&
+            lastRewardDate.getMonth() === nowDate.getMonth() &&
+            lastRewardDate.getDate() === nowDate.getDate();
+        const isOpen = offlineStartTime > 0 &&
+            now - offlineStartTime >= Number(checkRewardTime) &&
+            !hasShownToday;
+
+        // loginDate 作为没有收到 EVENT_HIDE 时的兜底时间；hideTime 读取后清空，避免重复使用旧时间。
+        this.playerInfo.loginDate = now;
+        if (this.settings) {
+            this.settings.hideTime = 0;
+        }
+        if (isOpen) {
+            this.playerInfo.offlineRewardDate = now;
         }
 
-        this.savePlayerInfoToLocalCache();
+        this.flushLocalCache();
         return isOpen;
     }
 

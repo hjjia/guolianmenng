@@ -5,6 +5,7 @@ import { resourceUtil } from '../../frameworks/resourceUtil';
 import { constants } from '../../shared/constants';
 import * as i18n from '../../../../extensions/i18n/assets/LanguageData';
 import { uiManager } from '../../frameworks/uiManager';
+import { playerData } from '../../frameworks/playerData';
 const { ccclass, property } = _decorator;
 
 @ccclass('Reward')
@@ -137,6 +138,7 @@ export class Reward extends Component {
                 GameLogic.instance.addProp(this.itemSubType, this.itemAmount);
                 break;
         }
+        playerData.instance.flushLocalCache();
     }
 
     showDoubleReward() {

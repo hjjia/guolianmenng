@@ -296,8 +296,9 @@ const constants = {
     //2，3，4, 5级对应的解锁道具
     UNLOCK_PROP_ID: [1, 2, 3, 4],
 
-    //离线奖励，与上次登录时间超过10分钟
-    OFFLINE_REWARD: 10,
+    // 离线奖励：离线达到30分钟后才可触发，且每天最多展示一次。
+    OFFLINE_REWARD: 30,
+    OFFLINE_REWARD_GOLD: 100,
 
     // 微信banner广告
     WX_BANNER_ADS: {

@@ -4,6 +4,7 @@ import { uiManager } from '../../frameworks/uiManager';
 import { constants } from '../../shared/constants';
 import { resourceUtil } from '../../frameworks/resourceUtil';
 import { localConfig } from '../../frameworks/localConfig';
+import { playerData } from '../../frameworks/playerData';
 import * as i18n from '../../../../extensions/i18n/assets/LanguageData';
 const { ccclass, property } = _decorator;
 
@@ -114,6 +115,7 @@ export class OffLineReward extends Component {
 
     onBtnNormalClick() {
         GameLogic.instance.addGold(this.itemAmount);
+        playerData.instance.flushLocalCache();
         this.close();
     }
 

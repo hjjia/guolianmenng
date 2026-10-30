@@ -119,5 +119,6 @@ export class signInReward extends Component {
         if (this.callback) {
             this.callback();
         }
+        playerData.instance.flushLocalCache();
     }
 }

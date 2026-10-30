@@ -66,7 +66,7 @@ export class GameLogic {
             if (playerData.instance.isOpenOffLineReward(constants.OFFLINE_REWARD * 60 * 1000)) {
                 uiManager.instance.showDialog('pve/offLineReward', [{
                     itemType: constants.REWARD_TYPE.GOLD,
-                    itemAmount: 500,
+                    itemAmount: constants.OFFLINE_REWARD_GOLD,
                     itemSubType: 0
                 }]);
             }
