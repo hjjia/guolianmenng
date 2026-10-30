@@ -96,13 +96,13 @@ export class LevelUI extends Component {
             uiManager.instance.showTips(i18n.t('pve.cannotSkipLastLevel'));
             return;
         }
-        uiManager.instance.showDialog('pve/levelPanel', [this.levelInfo, this.levelCallback]);
+        const run = playerData.instance.prepareLevelRun(Number(this.levelInfo.ID));
+        uiManager.instance.showDialog('pve/levelPanel', [run.levelInfo, () => this.levelCallback(run)]);
     }
 
-    levelCallback() {
-        // let timeStamp = Date.now();
+    levelCallback(run: any) {
         try {
-            playerData.instance.level = this.levelInfo.ID;
+            playerData.instance.level = run.levelId;
             SceneManager.instance.loadScene('fight', [
                 function (cb: any) {
                     cb();

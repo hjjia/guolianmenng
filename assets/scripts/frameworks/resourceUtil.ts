@@ -4,6 +4,13 @@ const { ccclass } = _decorator;
 @ccclass("resourceUtil")
 export class resourceUtil {
     /**
+     * Cocos 会根据图片的导入设置生成 SpriteFrame 或仅生成 Texture2D。
+     * 主题新增的棋子可能属于后者，因此统一在这里兼容并缓存运行时创建的 SpriteFrame。
+     */
+    private static _spriteFrameCache: { [path: string]: SpriteFrame } = {};
+    private static _spriteRequestPath: WeakMap<SpriteComponent, string> = new WeakMap();
+
+    /**
  * 加载资源
  * @param url   资源路径
  * @param type  资源类型
@@ -236,15 +243,34 @@ export class resourceUtil {
      * @param cb 回调函数
      */
     public static setSpriteFrame (path: string, sprite: SpriteComponent, cb: Function) {
+        if (sprite && isValid(sprite)) {
+            this._spriteRequestPath.set(sprite, path);
+        }
+
+        const applySpriteFrame = (spriteFrame: SpriteFrame) => {
+            // 棋子节点来自对象池。异步加载完成前节点可能已改作另一种水果，
+            // 只允许最后一次请求写入，避免旧请求把新图片覆盖掉。
+            if (sprite && isValid(sprite) && this._spriteRequestPath.get(sprite) === path) {
+                sprite.spriteFrame = spriteFrame;
+            }
+            cb(null);
+        };
+
+        const cached = this._spriteFrameCache[path];
+        if (cached && isValid(cached)) {
+            applySpriteFrame(cached);
+            return;
+        }
+
         resources.load(path + '/spriteFrame', SpriteFrame, (spriteError, spriteFrame) => {
             if (spriteFrame) {
-                if (sprite && isValid(sprite)) sprite.spriteFrame = spriteFrame;
-                cb(null);
+                this._spriteFrameCache[path] = spriteFrame;
+                applySpriteFrame(spriteFrame);
                 return;
             }
 
-            // 旧工程的 cake09～cake11 被导入为 Texture2D；后续新增棋子也可能沿用此设置。
-            resources.load(path, Texture2D, (textureError, texture) => {
+            // 仅导入为 Texture2D 的图片在 resources 中注册为“原路径/texture”。
+            resources.load(path + '/texture', Texture2D, (textureError, texture) => {
                 if (textureError || !texture) {
                     console.error('set sprite frame failed:', path, spriteError || textureError);
                     cb(spriteError || textureError);
@@ -252,8 +278,8 @@ export class resourceUtil {
                 }
                 const frame = new SpriteFrame();
                 frame.texture = texture;
-                if (sprite && isValid(sprite)) sprite.spriteFrame = frame;
-                cb(null);
+                this._spriteFrameCache[path] = frame;
+                applySpriteFrame(frame);
             });
         });
     }

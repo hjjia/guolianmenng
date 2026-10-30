@@ -48,6 +48,7 @@ export class LinkContent extends Component {
     public isRefreshing: any;
     public arrConnected: any;
     public nodeHand: any;
+    private _boardRandomState: number = 1;
 
     show (fightScene: any) {
         const uiTran = this.node.getComponent(UITransform)!;
@@ -61,7 +62,9 @@ export class LinkContent extends Component {
         this.dictCakes = {};
         this.arrLinks = [];
         this.arrLines = [];
-        this.levelInfo = playerData.instance.getCurrentLevelInfo();
+        this.levelInfo = playerData.instance.getActiveLevelInfo();
+        const run = playerData.instance.getActiveLevelRun();
+        this._boardRandomState = run ? run.boardSeed : 1;
         console.log('[linkContent.show] cakes=' + this.levelInfo.cakes + ' targets=' + this.levelInfo.targets + ' dictTargets=' + JSON.stringify(playerData.instance.dictTargets));
         this.initCake();
     }
@@ -106,11 +109,12 @@ export class LinkContent extends Component {
     generateBoardCakes (arrRandom: any, totalCell: number) {
         let result: any[] = [];
 
-        // 先放入保底的目标水果（每种目标至少占棋盘 1/8 ≈ 8 个，保证开局明显可见）
+        // 开局目标占比由本局快照决定，避免弹窗与实际棋盘各算一遍。
         let dictTargets = playerData.instance.dictTargets || {};
         let targetCount = Object.keys(dictTargets).length || 1;
-        // 目标水果总数最多占棋盘一半，剩余给非目标水果做装饰
-        let totalTargetSlots = Math.floor(totalCell / 2);
+        let run = playerData.instance.getActiveLevelRun();
+        let initialTargetRatio = run ? run.initialTargetRatio : 0.5;
+        let totalTargetSlots = Math.floor(totalCell * initialTargetRatio);
         let perTargetSlot = Math.floor(totalTargetSlots / targetCount);
 
         for (let cakeName in dictTargets) {
@@ -124,18 +128,55 @@ export class LinkContent extends Component {
 
         // 剩余格子随机填充
         while (result.length < totalCell) {
-            result.push(arrRandom[loadsh.random(0, arrRandom.length - 1)]);
+            result.push(arrRandom[this.boardRandomInt(0, arrRandom.length - 1)]);
         }
 
         // 打乱顺序，避免目标水果集中在棋盘头部
         for (let i = result.length - 1; i > 0; i--) {
-            let j = loadsh.random(0, i);
+            let j = this.boardRandomInt(0, i);
             let tmp = result[i];
             result[i] = result[j];
             result[j] = tmp;
         }
 
+        if (run && run.friendlyBoard) {
+            this.ensureFriendlyOpening(result, Object.keys(dictTargets)[0]);
+        }
+
         return result;
+    }
+
+    private nextBoardRandom() {
+        this._boardRandomState = (this._boardRandomState + 0x6D2B79F5) >>> 0;
+        let value = this._boardRandomState;
+        value = Math.imul(value ^ value >>> 15, value | 1);
+        value ^= value + Math.imul(value ^ value >>> 7, value | 61);
+        return ((value ^ value >>> 14) >>> 0) / 4294967296;
+    }
+
+    private boardRandomInt(min: number, max: number) {
+        return min + Math.floor(this.nextBoardRandom() * (max - min + 1));
+    }
+
+    private ensureFriendlyOpening(cakes: any[], targetCake: string) {
+        if (!targetCake) {
+            return;
+        }
+        let row = Math.floor(constants.LINK_ROWS_COUNT / 2);
+        let startCol = Math.max(0, Math.floor(constants.LINK_COLS_COUNT / 2) - 1);
+        let friendlySlots = [0, 1, 2].map((offset: number) => row * constants.LINK_COLS_COUNT + startCol + offset);
+        friendlySlots.forEach((slot: number) => {
+            if (cakes[slot] === targetCake) {
+                return;
+            }
+            let donor = cakes.findIndex((cake: string, index: number) =>
+                cake === targetCake && friendlySlots.indexOf(index) === -1);
+            if (donor >= 0) {
+                let oldCake = cakes[slot];
+                cakes[slot] = cakes[donor];
+                cakes[donor] = oldCake;
+            }
+        });
     }
 
     showAllLinkItem (isShow: any, callback: any) {
@@ -572,7 +613,7 @@ export class LinkContent extends Component {
                     // 优先补目标水果，没有则随机
                     let randomCake = priorityQueue.length > 0
                         ? priorityQueue.pop()
-                        : arrRandom[loadsh.random(0, arrRandom.length - 1)];
+                        : arrRandom[this.boardRandomInt(0, arrRandom.length - 1)];
                     this.createCakeForFill(index, randomCake, showIndex);
                 }
             }
@@ -587,7 +628,8 @@ export class LinkContent extends Component {
      * 保证每种还需消除的目标水果在棋盘上不少于保底数量（默认6个）
      */
     getPriorityFillCakes (arrRandom: any) {
-        let MIN_TARGET_COUNT = 6; // 补充时每种目标水果在棋盘上的保底数量
+        let run = playerData.instance.getActiveLevelRun();
+        let MIN_TARGET_COUNT = run ? run.refillTargetMin : 6;
         let queue: any[] = [];
         let dictTargets = playerData.instance.dictTargets || {};
 

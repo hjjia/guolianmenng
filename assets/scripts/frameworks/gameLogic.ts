@@ -153,7 +153,8 @@ export class GameLogic {
     }
 
     resetLevel() {
-        playerData.instance.startNewLevel();
+        let run = playerData.instance.prepareLevelRun(Number(playerData.instance.level), true);
+        playerData.instance.startNewLevel(run);
         clientEvent.dispatchEvent('newLevel');
     }
 

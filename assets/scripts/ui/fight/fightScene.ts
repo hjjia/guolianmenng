@@ -119,6 +119,7 @@ export class FightScene extends Component {
     }
 
     showGameOverUI () {
+        playerData.instance.recordCurrentLevelFailure();
         uiManager.instance.showDialog("fight/balanceFailed");
     }
 

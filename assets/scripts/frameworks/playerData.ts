@@ -10,6 +10,19 @@ import { gameBrand } from "../shared/gameBrand";
 
 const { ccclass, property } = _decorator;
 
+export interface LevelRunConfig {
+    runId: string;
+    levelId: number;
+    failCount: number;
+    assistTier: number;
+    levelSeed: number;
+    boardSeed: number;
+    initialTargetRatio: number;
+    refillTargetMin: number;
+    friendlyBoard: boolean;
+    levelInfo: any;
+}
+
 @ccclass("playerData")
 export class playerData extends Component {
     public static _instance: playerData;
@@ -42,6 +55,8 @@ export class playerData extends Component {
     private _settings: any = null;
     private _isNewBee: boolean = false;    //默认非新手
     private _dataVersion: string = '';
+    private _preparedLevelRun: LevelRunConfig | null = null;
+    private _activeLevelRun: LevelRunConfig | null = null;
 
     public get bag() {
         return this._bag;
@@ -576,14 +591,22 @@ export class playerData extends Component {
         return this.spareStep <= 0;
     }
 
-    startNewLevel() {
-        console.log('[startNewLevel] level=' + this.level);
-        let levelInfo = this.getCurrentLevelInfo();
+    startNewLevel(runConfig?: LevelRunConfig) {
+        let run = runConfig || this._preparedLevelRun;
+        if (!run || run.levelId !== Number(this.level)) {
+            run = this.prepareLevelRun(Number(this.level));
+        }
+        this.level = run.levelId;
+        this._preparedLevelRun = run;
+        this._activeLevelRun = run;
+        let levelInfo = run.levelInfo;
         this.score = 0;
         this.spareStep = 0;
         this.curLevelInfo = {};
         this.curLevelInfo.startTime = Date.now();
         this.curLevelInfo.infinite = false;
+        this.curLevelInfo.runId = run.runId;
+        this.curLevelInfo.failureRecorded = false;
         if (levelInfo) {
             this.spareStep = levelInfo.limit;
         }
@@ -597,6 +620,7 @@ export class playerData extends Component {
         }
 
         this.arrStars = levelInfo.stars.split('|');
+        console.log('[LevelRun] start', run.runId, 'targets=' + levelInfo.targets, 'cakes=' + levelInfo.cakes);
     }
 
     // CSV中定义的最大关卡ID
@@ -611,8 +635,18 @@ export class playerData extends Component {
     private _generatedLevelCache: { [key: number]: any } = {};
 
     getCurrentLevelInfo() {
-        console.log('[V2-getCurrentLevelInfo] this.level=' + this.level);
         return this.getLevelInfoById(this.level);
+    }
+
+    getActiveLevelInfo() {
+        if (this._activeLevelRun && this._activeLevelRun.levelId === Number(this.level)) {
+            return this._activeLevelRun.levelInfo;
+        }
+        return this.getCurrentLevelInfo();
+    }
+
+    getActiveLevelRun() {
+        return this._activeLevelRun;
     }
 
     /**
@@ -623,27 +657,18 @@ export class playerData extends Component {
         let level = localConfig.instance.queryByID('level', levelId);
 
         if (level) {
-            level.level = levelId;
-            return level;
+            return Object.assign({}, level, { level: Number(levelId) });
         }
 
         // 超过CSV定义的关卡，动态生成（同一关卡只生成一次，缓存复用）
         let numId = Number(levelId);
-        let isCached = !!this._generatedLevelCache[numId];
-        if (!isCached) {
+        if (!this._generatedLevelCache[numId]) {
             this._generatedLevelCache[numId] = this.generateLevelInfo(numId);
-            console.log('[V2-LevelInfo] 新生成 level=' + numId + ' targets=' + this._generatedLevelCache[numId].targets + ' cakes=' + this._generatedLevelCache[numId].cakes + ' 调用栈:', new Error().stack);
-        } else {
-            console.log('[V2-LevelInfo] 缓存命中 level=' + numId + ' targets=' + this._generatedLevelCache[numId].targets);
         }
-        level = this._generatedLevelCache[numId];
-        level.level = numId;
-        return level;
+        return Object.assign({}, this._generatedLevelCache[numId], { level: numId });
     }
 
-    /**
-     * 清除指定关卡的生成缓存（进入新关卡时调用，确保重玩同一关也是新的随机布局）
-     */
+    /** 清除动态关卡缓存；主题热切换或调试关卡生成参数时使用。 */
     clearGeneratedLevelCache(levelId?: number) {
         if (levelId !== undefined) {
             delete this._generatedLevelCache[levelId];
@@ -653,46 +678,42 @@ export class playerData extends Component {
     }
 
     /**
-     * 动态生成超过CSV范围的关卡参数
-     * 设计思路：水果种类锁定7~8种，目标和步数随关卡数缓慢递增
+     * 动态生成超过CSV范围的关卡参数。
+     * 水果种类保持7~8种，长期难度缓慢上升，并在每10关内形成有回落点的节奏波形。
      */
     generateLevelInfo(levelId: number) {
-        let n = levelId - playerData.CSV_MAX_LEVEL; // 超出CSV的关卡偏移量（从1开始）
-
-        // 水果种类：紧接第50关(7种)，n>=21开始升到8种
-        // n=1~20(关51~70) → 7种, n=21+ → 8种
-        let cakeCount = n >= 21 ? 8 : 7;
-        // 从全部水果中随机选取cakeCount种
+        let n = Math.max(1, levelId - playerData.CSV_MAX_LEVEL);
+        let chapter = Math.floor((n - 1) / 10);
+        let phase = (n - 1) % 10;
+        // 每10关形成一组：前段舒缓、中段上升、第6关回落、最后一关形成小高峰。
+        let phaseScale = [0.84, 0.89, 0.94, 0.99, 1.04, 0.91, 0.99, 1.06, 1.13, 1.19][phase];
+        let longTermScale = 1 + Math.min(0.16, chapter * 0.012);
+        let difficultyScale = phaseScale * longTermScale;
+        let cakeCount = chapter >= 2 ? 8 : 7;
+        let levelSeed = this.hashString(gameBrand.id + ':level:' + levelId);
+        let random = this.createSeededRandom(levelSeed);
         let shuffled = playerData.ALL_CAKES.slice();
         for (let i = shuffled.length - 1; i > 0; i--) {
-            let j = Math.floor(Math.random() * (i + 1));
+            let j = Math.floor(random() * (i + 1));
             let tmp = shuffled[i];
             shuffled[i] = shuffled[j];
             shuffled[j] = tmp;
         }
         let cakes = shuffled.slice(0, cakeCount).join('|');
 
-        // 目标：3种水果，紧接第50关难度（总数约54），每关+0.3
-        // n=1 → 单种18-21，总数54-63（≈ 第50关）
-        // n=10 → 单种21-24，总数63-72
-        // n=30 → 单种27-30(封顶)，总数 81-90
         let targetCakes = shuffled.slice(0, 3);
-        let baseTarget = 18;
-        let targetGrowth = Math.floor(n * 0.3);
-        let maxTarget = 30;
         let targets = targetCakes.map((cake: string) => {
-            let count = Math.min(baseTarget + targetGrowth + Math.floor(Math.random() * 3), maxTarget);
+            let baseTarget = 18 + Math.min(5, Math.floor(chapter / 3));
+            let count = Math.max(15, Math.min(30, Math.round((baseTarget + random() * 2) * difficultyScale)));
             return cake + '-' + count;
         }).join('|');
 
-        // 步数：从20起步，缓慢增长，最多30步（目标变多步数也增加，维持通关率）
-        let limit = Math.min(20 + Math.floor(n * 0.2), 30);
+        let limit = Math.max(18, Math.min(24, Math.round(22 - (difficultyScale - 1) * 6)));
 
         // 星级分数线：随关卡递增（基础值随关卡增大）
         let baseStar = 5400 + n * 100;
         let stars = baseStar + '|' + (baseStar * 2) + '|' + (baseStar * 3);
 
-        // 金币奖励：固定最高档
         let golds = '75|75|150';
 
         return {
@@ -702,7 +723,162 @@ export class playerData extends Component {
             targets: targets,
             limit: limit,
             stars: stars,
-            golds: golds
+            golds: golds,
+            levelSeed: levelSeed,
+            difficultyScale: difficultyScale
+        };
+    }
+
+    /**
+     * 为关卡弹窗和实际战斗生成同一份本局快照。
+     * 连续失败2/3/4/5次时依次开启：友好开局、目标占比+5%、补充保底+1、步数+2。
+     */
+    prepareLevelRun(levelId: number, force: boolean = false) {
+        let failCount = this.getLevelFailureCount(levelId);
+        if (!force && this._preparedLevelRun &&
+            this._preparedLevelRun.levelId === levelId &&
+            this._preparedLevelRun.failCount === failCount) {
+            return this._preparedLevelRun;
+        }
+
+        let baseInfo = this.getLevelInfoById(levelId);
+        let assistTier = failCount >= 5 ? 4 : failCount >= 4 ? 3 : failCount >= 3 ? 2 : failCount >= 2 ? 1 : 0;
+        let difficulty = this.getLevelDifficultyDefaults(levelId, baseInfo.difficultyScale);
+        let levelSeed = baseInfo.levelSeed || this.hashString(gameBrand.id + ':level:' + levelId);
+        let boardSeed = this.hashString(gameBrand.id + ':board:' + levelId + ':failure:' + failCount);
+        let levelInfo = Object.assign({}, baseInfo, {
+            limit: Number(baseInfo.limit) + difficulty.extraSteps + (assistTier >= 4 ? 2 : 0)
+        });
+        let run: LevelRunConfig = {
+            runId: levelId + '-' + failCount + '-' + boardSeed,
+            levelId: levelId,
+            failCount: failCount,
+            assistTier: assistTier,
+            levelSeed: levelSeed,
+            boardSeed: boardSeed,
+            initialTargetRatio: Math.min(0.65, difficulty.initialTargetRatio + (assistTier >= 2 ? 0.05 : 0)),
+            refillTargetMin: difficulty.refillTargetMin + (assistTier >= 3 ? 1 : 0),
+            friendlyBoard: assistTier >= 1,
+            levelInfo: levelInfo
+        };
+        this.validateLevelRun(run);
+        this._preparedLevelRun = run;
+        console.log('[LevelRun] prepare', run.runId, 'assist=' + assistTier, 'limit=' + levelInfo.limit);
+        return run;
+    }
+
+    recordCurrentLevelFailure() {
+        if (!this._activeLevelRun || (this.curLevelInfo && this.curLevelInfo.failureRecorded)) {
+            return this.getLevelFailureCount(Number(this.level));
+        }
+        let state = this.ensureDifficultyState();
+        let key = String(this._activeLevelRun.levelId);
+        let previous = state.failures[key];
+        state.failures[key] = {
+            count: Math.min(99, (previous && Number(previous.count) || 0) + 1),
+            lastFailedAt: Date.now()
+        };
+        this.curLevelInfo.failureRecorded = true;
+        this._preparedLevelRun = null;
+        this.pruneFailureRecords(state.failures);
+        this.savePlayerInfoToLocalCache();
+        return state.failures[key].count;
+    }
+
+    clearLevelFailures(levelId: number) {
+        let state = this.ensureDifficultyState();
+        let key = String(levelId);
+        if (state.failures.hasOwnProperty(key)) {
+            delete state.failures[key];
+            this.savePlayerInfoToLocalCache();
+        }
+        this._preparedLevelRun = null;
+    }
+
+    getLevelFailureCount(levelId: number) {
+        let state = this.ensureDifficultyState();
+        let record = state.failures[String(levelId)];
+        return record ? Math.max(0, Number(record.count) || 0) : 0;
+    }
+
+    private getLevelDifficultyDefaults(levelId: number, difficultyScale?: number) {
+        if (levelId <= 10) {
+            return { initialTargetRatio: 0.55, refillTargetMin: 7, extraSteps: 2 };
+        }
+        if (levelId <= 20) {
+            return { initialTargetRatio: 0.50, refillTargetMin: 6, extraSteps: 1 };
+        }
+        if (levelId <= 35) {
+            return { initialTargetRatio: 0.45, refillTargetMin: 5, extraSteps: 0 };
+        }
+        if (levelId <= playerData.CSV_MAX_LEVEL) {
+            return { initialTargetRatio: 0.40, refillTargetMin: 4, extraSteps: 0 };
+        }
+        let scale = Number(difficultyScale) || 1;
+        if (scale <= 0.94) {
+            return { initialTargetRatio: 0.48, refillTargetMin: 6, extraSteps: 0 };
+        }
+        if (scale <= 1.04) {
+            return { initialTargetRatio: 0.44, refillTargetMin: 5, extraSteps: 0 };
+        }
+        return { initialTargetRatio: 0.40, refillTargetMin: 4, extraSteps: 0 };
+    }
+
+    private ensureDifficultyState() {
+        if (!this._playerInfo) {
+            this._playerInfo = {};
+        }
+        if (!this._playerInfo.difficultyState || this._playerInfo.difficultyState.version !== 1) {
+            this._playerInfo.difficultyState = { version: 1, failures: {} };
+        }
+        if (!this._playerInfo.difficultyState.failures) {
+            this._playerInfo.difficultyState.failures = {};
+        }
+        return this._playerInfo.difficultyState;
+    }
+
+    private pruneFailureRecords(failures: any) {
+        let keys = Object.keys(failures);
+        if (keys.length <= 20) {
+            return;
+        }
+        keys.sort((a: string, b: string) => (failures[b].lastFailedAt || 0) - (failures[a].lastFailedAt || 0));
+        for (let i = 20; i < keys.length; i++) {
+            delete failures[keys[i]];
+        }
+    }
+
+    private validateLevelRun(run: LevelRunConfig) {
+        let cakes = String(run.levelInfo.cakes || '').split('|');
+        let targets = String(run.levelInfo.targets || '').split('|');
+        if (!cakes.length || cakes[0] === '' || !targets.length || targets[0] === '') {
+            throw new Error('关卡 ' + run.levelId + ' 缺少 cakes 或 targets');
+        }
+        targets.forEach((target: string) => {
+            let parts = target.split('-');
+            if (cakes.indexOf(parts[0]) === -1 || !(Number(parts[1]) > 0)) {
+                throw new Error('关卡 ' + run.levelId + ' 的目标配置无效：' + target);
+            }
+        });
+    }
+
+    private hashString(value: string) {
+        let hash = 2166136261;
+        for (let i = 0; i < value.length; i++) {
+            hash ^= value.charCodeAt(i);
+            hash = Math.imul(hash, 16777619);
+        }
+        return hash >>> 0;
+    }
+
+    private createSeededRandom(seed: number) {
+        let state = seed >>> 0;
+        return () => {
+            state += 0x6D2B79F5;
+            let value = state;
+            value = Math.imul(value ^ value >>> 15, value | 1);
+            value ^= value + Math.imul(value ^ value >>> 7, value | 61);
+            return ((value ^ value >>> 14) >>> 0) / 4294967296;
         };
     }
 
@@ -1117,8 +1293,9 @@ export class playerData extends Component {
     }
     finishLevel(level: any, score: any) {
         let star = 0;
-        // 走缓存方法，保证一致性
-        let levelInfo = this.getLevelInfoById(level);
+        let levelInfo = this._activeLevelRun && this._activeLevelRun.levelId === Number(level)
+            ? this._activeLevelRun.levelInfo
+            : this.getLevelInfoById(level);
 
         let costTime = (Date.now() - this.curLevelInfo.startTime) / 1000;
 
@@ -1157,12 +1334,14 @@ export class playerData extends Component {
             clientEvent.dispatchEvent('updateGold');
         }
 
+        this.clearLevelFailures(Number(level));
+
         return { levelId: level, score: score, star: star, gold: gold, costTime: costTime, spareStep: this.spareStep };
     }
 
     nextLevel() {
         this.level++;
-
-        this.startNewLevel();
+        let run = this.prepareLevelRun(Number(this.level), true);
+        this.startNewLevel(run);
     }
 }
