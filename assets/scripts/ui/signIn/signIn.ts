@@ -44,6 +44,9 @@ export class SignIn extends Component {
     }
 
     show() {
+        // 广告尚未接入时隐藏“双倍领取”，避免按钮文案与实际一倍奖励不一致。
+        // 普通签到仍可通过点击当天高亮的奖励卡片领取。
+        this.ndBtnDoubleReceive.active = false;
         playerData.instance.updateSignInCurrentDay();
         let signInInfo = playerData.instance.playerInfo['signInInfo'];
         console.log('###signInfo', signInInfo);
