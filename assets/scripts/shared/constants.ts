@@ -287,8 +287,8 @@ const constants = {
         NULL: 2
     },
 
-    //商场随机道具倒计时的小时数
-    SHOP_COUNTDOWN_HOURS: 4,
+    // 商场随机免费道具倒计时：早晚各一次，避免免费道具产出过快。
+    SHOP_COUNTDOWN_HOURS: 12,
 
     //解锁道具最高的得到第几关
     UNLOCK_HIGEST_LEVEl: 5,
