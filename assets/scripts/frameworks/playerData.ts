@@ -347,6 +347,10 @@ export class playerData extends Component {
             let isNeedRefreshReward = utils.getDeltaDays(this.playerInfo.onlineRewardInfo['loginTime'], Date.now()); //新的一天            
             if (isNeedRefreshReward > 0) {
                 this.resetOnlineRewardInfo();
+            } else if (this.playerInfo.onlineRewardInfo.value.times >= constants.ONLINE_REWARD_INTERVAL.length) {
+                // 兼容旧存档中已领取超过新上限的情况，当天不再继续循环发放。
+                this.playerInfo.onlineRewardInfo.value.receiveStatus = constants.REWARD_STATUS.RECEIVED;
+                this.playerInfo.onlineRewardInfo.usedTime = 0;
             }
         }
         return this.playerInfo.onlineRewardInfo;
@@ -523,8 +527,9 @@ export class playerData extends Component {
     getCountdownTime() {
         let onlineCurrentTimes = this.playerInfo['onlineRewardInfo'].value.times;
         let arrInterval = constants.ONLINE_REWARD_INTERVAL;
-        let maxInterval = arrInterval.length - 1;
-        onlineCurrentTimes = onlineCurrentTimes > maxInterval ? maxInterval : onlineCurrentTimes; //限制最大时间间隔
+        if (onlineCurrentTimes >= arrInterval.length) {
+            return 0;
+        }
         let curInterval = arrInterval[onlineCurrentTimes];
         return curInterval;
     }
@@ -542,7 +547,9 @@ export class playerData extends Component {
 
         if (isReceive) { //如果是点击领取则更新新的在线奖励内容
             onlineRewardValue.times += 1;
-            onlineRewardValue.receiveStatus = constants.REWARD_STATUS.UNRECEIVABLE;
+            onlineRewardValue.receiveStatus = onlineRewardValue.times >= constants.ONLINE_REWARD_INTERVAL.length
+                ? constants.REWARD_STATUS.RECEIVED
+                : constants.REWARD_STATUS.UNRECEIVABLE;
         } else { //倒计时结束，设置为可领取，并将倒计时消耗置为0
             onlineRewardValue.receiveStatus = constants.REWARD_STATUS.RECEIVABLE;
             this.playerInfo.onlineRewardInfo['usedTime'] = 0;

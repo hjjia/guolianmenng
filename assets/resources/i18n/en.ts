@@ -64,7 +64,8 @@ export const languages = {
     },
 
     "onlineReward": {
-        "receive": "Receive it"
+        "receive": "Receive it",
+        "completed": "Come back tomorrow"
     },
 
     "shop": {

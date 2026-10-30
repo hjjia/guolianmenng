@@ -270,8 +270,8 @@ const constants = {
         WATCH_AD_BTN_SUCCESS_TIMES: '视频按钮成功点击次数'
     },
 
-    //在线奖励时间间隔(分钟)
-    ONLINE_REWARD_INTERVAL: [0, 3, 5, 10, 30],
+    // 在线奖励时间间隔（分钟）：每天最多3份，需累计在线30、60、120分钟。
+    ONLINE_REWARD_INTERVAL: [30, 60, 120],
 
     //奖励领取状态
     REWARD_STATUS: {

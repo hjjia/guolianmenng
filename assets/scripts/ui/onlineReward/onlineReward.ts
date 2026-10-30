@@ -43,6 +43,14 @@ export class OnlineReward extends Component {
                 this.lbTime.string = i18n.t('onlineReward.receive');
                 this.unschedule(this.countDownCallback);
                 break;
+            case constants.REWARD_STATUS.RECEIVED:
+                if (this.btnReceive.node) {
+                    this.btnReceive.node.active = false;
+                }
+                this.aniFreeReward.play('freeGiftIdle');
+                this.lbTime.string = i18n.t('onlineReward.completed');
+                this.unschedule(this.countDownCallback);
+                break;
         }
     }
 

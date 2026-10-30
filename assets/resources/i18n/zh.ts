@@ -67,7 +67,8 @@ export const languages = {
     },
 
     "onlineReward": {
-        "receive": "立即领取"
+        "receive": "立即领取",
+        "completed": "今日已领完"
     },
 
     "shop": {
