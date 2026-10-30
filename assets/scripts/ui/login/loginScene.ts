@@ -22,6 +22,9 @@ export class LoginScene extends Component {
 
         profiler.hideStats();
 
+        // 登录前就注册微信分享，使登录页和后续所有场景都能使用右上角分享。
+        GameLogic.instance.initShare();
+
         //初始化音频
         AudioManager.instance.init();
         AudioManager.instance.playMusic(constants.AUDIO_MUSIC.BACKGROUND, true);

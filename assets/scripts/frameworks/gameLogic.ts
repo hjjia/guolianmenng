@@ -16,6 +16,7 @@ export class GameLogic {
     static _instance: GameLogic;
     channel: any;
     timer: any;
+    private _isShareInitialized: boolean = false;
 
     static get instance() {
         if (this._instance) {
@@ -28,17 +29,34 @@ export class GameLogic {
 
     initShare() {
         if (typeof wx === 'undefined') return;
+
         // 开启右上角转发按钮
         wx.showShareMenu({
             withShareTicket: true,
             menus: ['shareAppMessage', 'shareTimeline']
         });
-        // 设置转发内容
-        wx.onShareAppMessage(() => {
-            return {
-                title: gameBrand.shareTitle,
-            };
+
+        // 分享回调是全局监听，只注册一次，避免登录前后重复绑定。
+        if (this._isShareInitialized) {
+            return;
+        }
+        this._isShareInitialized = true;
+
+        const getShareInfo = () => ({
+            title: gameBrand.shareTitle,
         });
+
+        // 设置分享给好友的内容。
+        wx.onShareAppMessage(() => {
+            return getShareInfo();
+        });
+
+        // 朋友圈分享接口在部分基础库版本中不存在，调用前先做兼容判断。
+        if (typeof wx.onShareTimeline === 'function') {
+            wx.onShareTimeline(() => {
+                return getShareInfo();
+            });
+        }
     }
 
     onAppShow(res: any) {
