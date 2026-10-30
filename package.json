@@ -4,6 +4,7 @@
     "theme:validate": "node tools/select-game.js --check",
     "theme:optimize": "node tools/optimize-theme.js",
     "theme:import": "node tools/import-theme.js",
+    "theme:update": "node tools/update-theme.js",
     "select": "node tools/select-game.js",
     "select:fruit": "node tools/select-game.js fruit",
     "select:pet": "node tools/select-game.js pet"
@@ -11,7 +12,7 @@
   "creator": {
     "version": "3.8.0"
   },
-  "name": "PetCrush",
+  "name": "FruitCrash",
   "type": "3d",
   "uuid": "f4917753-0dd6-431a-b399-3fd4b9bc29bd",
   "version": "3.3.2",

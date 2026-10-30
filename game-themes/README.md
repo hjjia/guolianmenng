@@ -92,6 +92,20 @@ npm run select:fruit
 
 `npm run theme:list` 可以查看主题；`npm run theme:validate -- pet` 只校验资源，不同步。新增主题时，可参照本机 `/Users/jia/Documents/图片资料/萌宠消消岛/` 的独立交付包，在其同级目录生成新游戏文件夹。文件夹中的 `主题资源/` 与 `game-themes/<主题ID>/` 同结构；在工程根目录运行 `npm run theme:import -- "/完整路径/新游戏文件夹"`，脚本会复制、校验并切换。交付文件夹可以叫中文名，但目标目录使用 `主题资源/theme.json` 的英文 `id`：例如 `海洋消消乐/` 中 `"id": "ocean"`，会导入 `game-themes/ocean/`，并自动添加 `npm run select:ocean`。方形图标的各个尺寸保留在交付包的 `logo-sizes/`，只有 512 PNG 同步到主题的 `publishing/icon-512.png`。
 
+已有主题更新资源时，不要使用 `theme:import`。关闭 Cocos Creator 后执行：
+
+```bash
+npm run theme:update -- "/完整素材目录" <主题ID>
+```
+
+素材目录可以是包含 `主题资源/` 的交付根目录，或主题资源目录本身。例如：
+
+```bash
+npm run theme:update -- "/Users/jia/Documents/图片资料/果联盟/新版UI/果联萌美术v2" fruit
+```
+
+命令会递归同步 `audio/`、`backgrounds/`、`branding/`、`effects/`、`fonts/`、`pieces/`、`publishing/`、`ui/` 等目录中的图片和音频，不删除旧文件，也不会复制 `.meta`。如果源 `theme.json` 的 `id` 与指定主题 ID 一致，配置文件也会参与更新；ID 不一致时会跳过配置，避免把其他主题的身份覆盖进来。所有变更会先备份再进行完整主题校验，校验失败时自动恢复，校验成功后自动切换到指定主题。
+
 ### 同一平台保留多套构建包
 
 切换主题后，在 Cocos **Build Path 右侧的输出名输入框**手动填写 `<主题ID>-<平台>`。Cocos 新建任务时可能自动生成 `wechatgame-001` 之类的名称；`select` 无法替新任务锁定这个输入框。`Name` 是游戏名称，不是输出目录名。构建路径左侧保持项目的 `build/` 即可。例如：

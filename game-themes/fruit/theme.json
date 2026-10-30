@@ -3,7 +3,7 @@
   "displayName": "果连萌",
   "projectName": "FruitCrash",
   "gameId": "fruit",
-  "pieceCount": 8,
+  "pieceCount": 32,
   "pieceName": "水果",
   "shareTitle": "果连萌 - 一起来消除吧！",
   "platforms": {
