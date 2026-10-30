@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, find, director, profiler, game, Game, Animation, Prefab, tween, Tween, Vec3 } from 'cc';
+import { _decorator, Component, Node, find, director, profiler, game, Game, Animation, Prefab } from 'cc';
 import { AudioManager } from '../../frameworks/audioManager';
 import { playerData } from '../../frameworks/playerData';
 import { uiManager } from '../../frameworks/uiManager';
@@ -16,7 +16,6 @@ const { ccclass, property } = _decorator;
 export class LoginScene extends Component {
     currentStep: any = null!;
     isLoadCsvFinishd: any = false;
-    private _startButton: Node | null = null;
 
     onLoad () {
         i18n.init('zh');
@@ -45,42 +44,6 @@ export class LoginScene extends Component {
         localConfig.instance.loadConfig(() => {
             this.isLoadCsvFinishd = true;
         })
-
-        this.startButtonPulse();
-    }
-
-    /**
-     * 给开始按钮增加轻微的呼吸缩放，提升登录页活力，同时保留按钮自身的按压反馈。
-     */
-    private startButtonPulse () {
-        const button = this.node.getChildByName('btnStart');
-        if (!button) {
-            console.warn('[LoginScene] 未找到 btnStart，跳过按钮呼吸动画');
-            return;
-        }
-
-        this._startButton = button;
-        const normalScale = button.scale.clone();
-        const enlargedScale = new Vec3(
-            normalScale.x * 1.06,
-            normalScale.y * 1.06,
-            normalScale.z
-        );
-
-        tween(button)
-            .repeatForever(
-                tween()
-                    .to(0.7, { scale: enlargedScale }, { easing: 'sineInOut' })
-                    .to(0.7, { scale: normalScale }, { easing: 'sineInOut' })
-            )
-            .start();
-    }
-
-    onDestroy () {
-        if (this._startButton) {
-            Tween.stopAllByTarget(this._startButton);
-            this._startButton = null;
-        }
     }
 
     showLoadingUI () {
