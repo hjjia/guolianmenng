@@ -1514,6 +1514,18 @@
     "height": 60
   },
   {
+    "file": "ui/home-homeLevelPrefix.png",
+    "target": "assets/textures/ui/home/homeLevelPrefix.png",
+    "width": 58,
+    "height": 56
+  },
+  {
+    "file": "ui/home-homeLevelSuffix.png",
+    "target": "assets/textures/ui/home/homeLevelSuffix.png",
+    "width": 56,
+    "height": 56
+  },
+  {
     "file": "ui/home-homeImg02.png",
     "target": "assets/textures/ui/home/homeImg02.png",
     "width": 114,

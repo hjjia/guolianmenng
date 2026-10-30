@@ -57,6 +57,7 @@ export class playerData extends Component {
     private _dataVersion: string = '';
     private _preparedLevelRun: LevelRunConfig | null = null;
     private _activeLevelRun: LevelRunConfig | null = null;
+    private _isInitialized: boolean = false;
 
     public get bag() {
         return this._bag;
@@ -92,6 +93,32 @@ export class playerData extends Component {
 
     public set isNewBee(v: boolean) {
         this._isNewBee = v;
+    }
+
+    /**
+     * 初始化本地玩家数据。可以从登录、战斗或其他独立预览场景安全地重复调用。
+     */
+    public initializeFromLocalCache() {
+        if (this._isInitialized) {
+            return;
+        }
+
+        this.loadGlobalCache();
+        if (!this.userId) {
+            this.generateRandomAccount();
+            console.log("###生成随机userId", this.userId);
+        }
+
+        this.loadFromCache();
+        if (!this.playerInfo || !this.playerInfo.createDate) {
+            this.createPlayerInfo();
+        }
+
+        // 兼容旧存档和直接预览场景，保证各数据容器始终可读。
+        this._history = this._history || {};
+        this._settings = this._settings || {};
+        this._bag = this._bag || {};
+        this._isInitialized = true;
     }
 
     /**
@@ -660,8 +687,13 @@ export class playerData extends Component {
             return Object.assign({}, level, { level: Number(levelId) });
         }
 
-        // 超过CSV定义的关卡，动态生成（同一关卡只生成一次，缓存复用）
         let numId = Number(levelId);
+        // CSV关卡不能静默回退为随机关卡，否则直接预览场景时会把第1关生成为高难度无限关卡。
+        if (numId <= playerData.CSV_MAX_LEVEL) {
+            throw new Error('关卡配置尚未加载或缺少关卡：' + numId);
+        }
+
+        // 超过CSV定义的关卡，动态生成（同一关卡只生成一次，缓存复用）
         if (!this._generatedLevelCache[numId]) {
             this._generatedLevelCache[numId] = this.generateLevelInfo(numId);
         }
@@ -1173,7 +1205,7 @@ export class playerData extends Component {
      * @param {Number} propId 道具id
      */
     getPropAmount(propId: any) {
-        if (this.bag.hasOwnProperty(propId)) {
+        if (this.bag && this.bag.hasOwnProperty(propId)) {
             return this.bag[propId].amount || 0; //考虑undefined所以加或0
         }
 

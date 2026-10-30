@@ -26,18 +26,8 @@ export class LoginScene extends Component {
         AudioManager.instance.init();
         AudioManager.instance.playMusic(constants.AUDIO_MUSIC.BACKGROUND, true);
 
-        //初始化玩家数据
-        playerData.instance.loadGlobalCache();
-        if (!playerData.instance.userId) {
-            playerData.instance.generateRandomAccount();
-            console.log("###生成随机userId", playerData.instance.userId);
-        }
-
-        playerData.instance.loadFromCache();
-
-        if (!playerData.instance.playerInfo || !playerData.instance.playerInfo.createDate) {
-            playerData.instance.createPlayerInfo();
-        }
+        // 初始化玩家数据；独立预览其他场景时也会调用同一入口。
+        playerData.instance.initializeFromLocalCache();
 
         //记录离线时间
         game.on(Game.EVENT_HIDE, () => {

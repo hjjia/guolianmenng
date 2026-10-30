@@ -18,16 +18,34 @@ export class localConfig {
         return this._instance;
     }
 
-    private _callback: Function = new Function();
+    private _callbacks: Function[] = [];
+    private _isLoading: boolean = false;
+    private _isLoaded: boolean = false;
     private _currentLoad: number = 0;
     private _cntLoad: number = 0;
+
+    public get isLoaded () {
+        return this._isLoaded;
+    }
 
     /**
      * 加载配置文件
      * @param {Function}cb 回调函数 
      */
     public loadConfig (cb: Function) {
-        this._callback = cb;
+        if (this._isLoaded) {
+            cb && cb();
+            return;
+        }
+
+        cb && this._callbacks.push(cb);
+        if (this._isLoading) {
+            return;
+        }
+
+        this._isLoading = true;
+        this._currentLoad = 0;
+        this._cntLoad = 0;
         this._loadCSV();
     }
 
@@ -131,11 +149,12 @@ export class localConfig {
     }
 
     private _tryToCallbackOnFinished () {
-        if (this._callback) {
-            this._currentLoad++;
-            if (this._currentLoad >= this._cntLoad) {
-                this._callback();
-            }
+        this._currentLoad++;
+        if (this._currentLoad >= this._cntLoad) {
+            this._isLoading = false;
+            this._isLoaded = true;
+            const callbacks = this._callbacks.splice(0);
+            callbacks.forEach((callback: Function) => callback());
         }
     }
 }

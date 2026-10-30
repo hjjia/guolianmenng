@@ -31,10 +31,23 @@ export class FightScene extends Component {
     public isLevelStart: any;
     public dictPropsUseTimes: any;
     public isShowOperationUI: any;
+    private _hasStartedLevel: boolean = false;
 
 
     start () {
         profiler.hideStats();
+
+        // 正式流程会在登录场景加载配置；直接预览 fight.scene 时也必须先加载，
+        // 避免第1～50关被误判成无限随机关卡。
+        localConfig.instance.loadConfig(() => this.startLevelAfterConfigLoaded());
+    }
+
+    private startLevelAfterConfigLoaded () {
+        if (this._hasStartedLevel || !this.node.isValid) {
+            return;
+        }
+        this._hasStartedLevel = true;
+        playerData.instance.initializeFromLocalCache();
         playerData.instance.startNewLevel();
         this.linkContent = this.nodeLinkContent.getComponent(LinkContent);
         this.fightUI = this.nodeFightUI.getComponent(FightUI);

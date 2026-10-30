@@ -1041,7 +1041,8 @@ export class LinkContent extends Component {
     }
 
     update (dt: any) {
-        if (this._fightScene.isLevelOver || !this._fightScene.isLevelStart || this.isShowHandGuide || this.currentNode || this._fightScene.isShowOperationUI) {
+        // 直接预览战斗场景时，CSV和玩家数据会先异步初始化；绑定FightScene前不运行棋盘提示逻辑。
+        if (!this._fightScene || this._fightScene.isLevelOver || !this._fightScene.isLevelStart || this.isShowHandGuide || this.currentNode || this._fightScene.isShowOperationUI) {
             return;
         }
         this.lastOperationTime += dt;

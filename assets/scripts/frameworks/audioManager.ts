@@ -35,17 +35,38 @@ export class AudioManager {
     audios: AudioDataMap = {};
     arrSound: AudioData[] = [];
 
-    init() {
-        if (this._persistRootNode) return; //避免切换场景初始化报错
-        this._persistRootNode = new Node('audio');
-        director.getScene()!.addChild(this._persistRootNode);
-        game.addPersistRootNode(this._persistRootNode)
+    init(): boolean {
+        if (this._persistRootNode?.isValid) return true; // 避免切换场景重复初始化
+
+        const scene = director.getScene();
+        if (!scene) {
+            return false;
+        }
+
+        // 支持直接预览 fight/pve 场景，也兼容脚本热重载后已经存在的持久音频节点。
+        const existingAudioNode = scene.getChildByName('audio');
+        if (existingAudioNode) {
+            this._persistRootNode = existingAudioNode;
+        } else {
+            this._persistRootNode = new Node('audio');
+            scene.addChild(this._persistRootNode);
+            game.addPersistRootNode(this._persistRootNode);
+        }
+
+        this._audioSources = this._persistRootNode.getComponents(AudioSource);
+        this.audios = {};
+        this.arrSound = [];
 
         this.musicVolume = this.getAudioSetting(true) ? 0.8 : 0;
         this.soundVolume = this.getAudioSetting(false) ? 1 : 0;
+        return true;
     }
 
-    private _getAudioSource(clip: AudioClip) {
+    private _getAudioSource(clip: AudioClip): AudioSource | null {
+        if (!clip || !this.init()) {
+            return null;
+        }
+
         let result: AudioSource | undefined;
         for (let i = 0; i < this._audioSources.length; ++i) {
             let audioSource = this._audioSources[i];
@@ -91,7 +112,12 @@ export class AudioManager {
 
 
         resourceUtil.loadRes(path, AudioClip, (err: any, clip: any) => {
+            if (err || !clip) {
+                console.warn(`[AudioManager] 音乐加载失败：${path}`, err);
+                return;
+            }
             let source = this._getAudioSource(clip);
+            if (!source) return;
             let tmp: AudioData = {
                 source,
                 isMusic: true,
@@ -120,7 +146,12 @@ export class AudioManager {
         // }
 
         resourceUtil.loadRes(path + name, AudioClip, (err: any, clip: any) => {
+            if (err || !clip) {
+                console.warn(`[AudioManager] 音效加载失败：${path + name}`, err);
+                return;
+            }
             let source = this._getAudioSource(clip);
+            if (!source) return;
             let tmp: AudioData = {
                 source,
                 isMusic: false,
